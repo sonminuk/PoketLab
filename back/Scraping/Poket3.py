@@ -10,6 +10,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 
 # 포켓몬 종합데이터 : 총 1457개
+# 키 생성후 json 파일 옮긴후 실행해야됨
 
 def extract_pokemon_data(driver):
     data_list = []
