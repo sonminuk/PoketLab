@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeLab</title>
+    <style>
+        /* 간단한 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .item-image {
+            max-width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PokeLab</h1>
+        <nav>
+            <ul>
+                <li><a href="#pokemonList">포켓몬</a></li>
+                <li><a href="#movesList">기술</a></li>
+                <li><a href="#abilitiesList">특성</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="pokemonList">
+        <h2>포켓몬 목록</h2>
+        <div class="table-container">
+            <table id="pokemonTable">
+                <thead>
+                    <tr>
+                        <th>이미지</th>
+                        <th>이름</th>
+                        <th>타입</th>
+                        <th>특성</th>
+                        <th>HP</th>
+                        <th>공격</th>
+                        <th>방어</th>
+                        <th>특수 공격</th>
+                        <th>특수 방어</th>
+                        <th>속도</th>
+                        <th>총합</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="movesList">
+        <h2>기술 목록</h2>
+        <div class="table-container">
+            <table id="movesTable">
+                <thead>
+                    <tr>
+                        <th>기술 이름</th>
+                        <th>타입</th>
+                        <th>분류</th>
+                        <th>위력</th>
+                        <th>명중</th>
+                        <th>PP</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="abilitiesList">
+        <h2>특성 목록</h2>
+        <div class="table-container">
+            <table id="abilitiesTable">
+                <thead>
+                    <tr>
+                        <th>특성 이름</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Firebase 스크립트 추가 -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="index.js"></script> <!-- Firebase 초기화 및 데이터 처리 로직 포함 -->
+</body>
+
+</html>
