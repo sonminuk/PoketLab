@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from 'react';
 import database from './firebase';
 import PokemonList from './components/PokemonList';
@@ -28,6 +27,13 @@ function App() {
 
   return (
     <div className="App">
+      <div className="video-container">
+        <video className="full-screen-video" controls autoPlay muted>
+          <source src={`${process.env.PUBLIC_URL}/intro.mp4`} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
       <header>
         <h1>PokeLab</h1>
         <nav>
@@ -38,14 +44,6 @@ function App() {
           </ul>
         </nav>
       </header>
-
-       {/* 비디오 추가 */}
-       <div className="video-container">
-            <video width="600" controls autoPlay muted>
-              <source src={`${process.env.PUBLIC_URL}/intro.mp4`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-        </div>
 
       <section id="pokemonList">
         <h2>포켓몬 목록</h2>

@@ -21,6 +21,7 @@
   React를 사용해 사용자 인터페이스를 구축하고, 데이터 시각화 및 사용자 경험을 개선합니다.
 
   python, firebase Realtime 등을 이용한 웹 스크래핑을 이용 데이터 수집
+  (현재 (포켓몬정보, 기술, 특성)데이터만 있음)
 
 - **백엔드 개발**: 김진석  
   데이터베이스 설계 및 관리, 서버 사이드 로직 구현, API 개발 등을 담당합니다.
@@ -54,5 +55,5 @@
 ## 기술 스택
 
 - **프론트엔드**: React, HTML, CSS, JavaScript,
-- **백엔드**: Firebase Realtime Database, Node.js
+- **백엔드**: Firebase Realtime Database, Node.js, spring boot
 - **데이터 수집**: 웹 스크래핑 (python 사용)

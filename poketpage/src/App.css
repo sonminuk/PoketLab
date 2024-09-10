@@ -1,4 +1,69 @@
-/* src/App.css */
+/* 화면 전체를 채우는 비디오 */
+.full-screen-video {
+  position: fixed; /* fixed로 설정하여 비디오가 화면에 고정되도록 설정 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* 다른 콘텐츠보다 아래에 위치 */
+}
+
+/* 비디오 컨테이너가 화면 전체를 차지하게 설정 */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0; /* 비디오 주변의 여백 제거 */
+  padding: 0; /* 비디오 주변의 여백 제거 */
+}
+
+/* 기본 페이지 레이아웃 설정 */
+.App {
+  text-align: center;
+  padding-top: 100vh; /* 비디오 아래에 콘텐츠 배치 */
+  margin: 0; /* 페이지 전체의 여백 제거 */
+}
+
+header {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+header nav ul li {
+  margin: 0 1rem;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+section {
+  padding: 2rem;
+  background-color: #f8f8f8;
+  margin-top: 1rem;
+}
+
+
+/* App.css */
+
+/* 일반 스타일 */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -12,13 +77,6 @@ header {
   padding: 10px 0;
   text-align: center;
 }
-
-.video-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
 
 nav ul {
   list-style: none;
@@ -40,8 +98,25 @@ section {
   padding: 20px;
 }
 
+.video-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 테이블 스타일 */
 .table-container {
   overflow-x: auto;
+  margin-top: 20px;
 }
 
 table {
@@ -50,11 +125,14 @@ table {
   margin-bottom: 20px;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #ddd;
 }
 
-th, td {
+th,
+td {
   padding: 8px;
   text-align: left;
 }
@@ -65,4 +143,10 @@ th {
 
 .item-image {
   max-width: 100px;
+}
+
+/* 섹션 제목 */
+h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
 }
