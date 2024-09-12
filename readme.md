@@ -67,17 +67,14 @@ poketpage/
 │
 ├── src/
 │   ├── components/
-│   │   ├── AbilitiesList.js  # 특성 목록 컴포넌트
-│   │   ├── MovesList.js      # 기술 목록 컴포넌트
-│   │   ├── PokemonList.js    # 포켓몬 목록 컴포넌트
+│   │   ├── AbilitiesList.jsx  # 특성 목록 컴포넌트
+│   │   ├── MovesList.jsx      # 기술 목록 컴포넌트
+│   │   ├── PokemonList.jsx    # 포켓몬 목록 컴포넌트
 │   │   └── notice_board/
-│   │       ├── ConceptPosts.js     # 개념글 컴포넌트
-│   │       ├── NoticeMain.js        # 메인 게시판 페이지
-│   │       ├── NoticePosts.js       # 공지글 컴포넌트
-│   │       ├── RecommendedPosts.js  # 추천 게시글 컴포넌트
+│   │       ├── NoticeMain.jsx        # 메인 게시판 페이지
 │   │       └── NoticeMain.css        # 메인 게시판 페이지 스타일 시트
-│   ├── firebase.js           # Firebase 설정
-│   ├── App.js                # 앱의 메인 컴포넌트
+│   ├── firebase.jsx           # Firebase 설정
+│   ├── App.jsx                # 앱의 메인 컴포넌트
 │   ├── App.css               # 스타일 시트
 │   └── index.js              # 엔트리 포인트
 │
@@ -87,6 +84,8 @@ poketpage/
 
 # 다음주 9/19 까지
 
+09/12
+손민욱- 게시판 틀 생성및 (글쓰기, 삭제, 수정) 기능 구현, firebase 연결해놓음
 
 ## 게시판 
 
@@ -96,6 +95,14 @@ poketpage/
 - **회원가입**: 메인화면
 - **로그인**: 메인화면
 - **글쓰기**: 글쓰기화면 (수정화면 추가)
+
+### 상세 구조
+- 가장 위에 헤더 부분 고정
+- 왼쪽   : sidebar (여러 게시판) 생성
+- 오른쪽 : 회원정보 볼수 있는 부분 생성
+  (회원가입, 로그인) 버튼 -> 로그인을 했다면 회원정보 출력 ()
+- 가운데 : 게시판(글쓰기, 수정, 삭제)기능추가 
+
 ``````
 참조
 
