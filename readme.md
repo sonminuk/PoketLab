@@ -63,7 +63,6 @@
 poketpage/
 │
 ├── public/
-│   ├── intro.mp4            # 시작 화면 비디오
 │   └── index.html            # HTML 템플릿
 │
 ├── src/
