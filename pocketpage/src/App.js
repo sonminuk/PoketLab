@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import database from './firebase';
 import PokemonList from './components/PokemonList';
 import MovesList from './components/MovesList';
 import AbilitiesList from './components/AbilitiesList';
+import NoticeMain from './components/notice_board/NoticeMain'; // 공지 게시판
 import './App.css';
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
   useEffect(() => {
     database.ref('pokemon').on('value', (snapshot) => {
       setPokemonData(snapshot.val());
-    });  
+    });
 
     database.ref('moves').on('value', (snapshot) => {
       setMovesData(snapshot.val());
@@ -26,39 +28,38 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <div className="video-container">
-        <video className="full-screen-video" controls autoPlay muted>
-          <source src={`${process.env.PUBLIC_URL}/intro.mp4`} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+    <Router>
+      <div className="App">
+        <header>
+          <h1>PokeLab</h1>
+          <nav>
+            <ul>
+              <li><Link to="/">홈</Link></li>
+              <li><Link to="/pokemon">포켓몬</Link></li>
+              <li><Link to="/moves">기술</Link></li>
+              <li><Link to="/abilities">특성</Link></li>
+              <li><Link to="/notice">게시판</Link></li>
+            </ul>
+          </nav>
+        </header>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/pokemon" element={<PokemonList data={pokemonData} />} />
+          <Route path="/moves" element={<MovesList data={movesData} />} />
+          <Route path="/abilities" element={<AbilitiesList data={abilitiesData} />} />
+          <Route path="/notice" element={<NoticeMain />} />
+        </Routes>
       </div>
+    </Router>
+  );
+}
 
-      <header>
-        <h1>PokeLab</h1>
-        <nav>
-          <ul>
-            <li><a href="#pokemonList">포켓몬</a></li>
-            <li><a href="#movesList">기술</a></li>
-            <li><a href="#abilitiesList">특성</a></li>
-          </ul>
-        </nav>
-      </header>
-
-      <section id="pokemonList">
-        <h2>포켓몬 목록</h2>
-        <PokemonList data={pokemonData} />
-      </section>
-
-      <section id="movesList">
-        <h2>기술 목록</h2>
-        <MovesList data={movesData} />
-      </section>
-
-      <section id="abilitiesList">
-        <h2>특성 목록</h2>
-        <AbilitiesList data={abilitiesData} />
-      </section>
+function Home() {
+  return (
+    <div>
+      <h2>환영합니다!</h2>
+      <p>포켓랩에 오신 것을 환영합니다. 상단 메뉴를 이용해 각 페이지로 이동하세요.</p>
     </div>
   );
 }
