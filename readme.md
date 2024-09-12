@@ -58,7 +58,7 @@
 - **백엔드**: Firebase Realtime Database, Node.js, spring boot
 - **데이터 수집**: 웹 스크래핑 (python 사용)
 
-## 프로젝트 구조
+## 현) 프로젝트 구조
 ``````
 poketpage/
 │
@@ -85,7 +85,7 @@ poketpage/
 
 ``````
 
-# 다음주 9/19
+# 다음주 9/19 까지
 
 
 ## 게시판 
