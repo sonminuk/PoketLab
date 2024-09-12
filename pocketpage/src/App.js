@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     database.ref('pokemon').on('value', (snapshot) => {
       setPokemonData(snapshot.val());
-    });
+    });  
 
     database.ref('moves').on('value', (snapshot) => {
       setMovesData(snapshot.val());
