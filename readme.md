@@ -60,7 +60,7 @@
 
 ## 현) 프로젝트 구조
 ``````
-poketpage/
+pocketpage/
 │
 ├── public/
 │   └── index.html            # HTML 템플릿
@@ -72,13 +72,18 @@ poketpage/
 │   │   ├── PokemonList.jsx    # 포켓몬 목록 컴포넌트
 │   │   └── notice_board/
 │   │       ├── NoticeMain.jsx        # 메인 게시판 페이지
-│   │       └── NoticeMain.css        # 메인 게시판 페이지 스타일 시트
+│   │       ├── NoticeMain.css        # 메인 게시판 페이지 스타일 시트
+│   │       ├── Sidebar.js            # 게시판 목록을 표시하는 사이드바 컴포넌트
+│   │       ├── UserInfo.js           # 회원 정보 및 로그인/회원가입 버튼을 표시하는 컴포넌트
+│   │       ├── PostForm.js           # 글쓰기 및 수정 폼을 담당하는 컴포넌트
+│   │       ├── PostTable.js          # 게시글 목록을 테이블로 표시하는 컴포넌트
 │   ├── firebase.jsx           # Firebase 설정
 │   ├── App.jsx                # 앱의 메인 컴포넌트
-│   ├── App.css               # 스타일 시트
-│   └── index.js              # 엔트리 포인트
+│   ├── App.css                # 스타일 시트
+│   └── index.js               # 엔트리 포인트
 │
-└── package.json              # 프로젝트 메타데이터 및 종속성
+└── package.json               # 프로젝트 메타데이터 및 종속성
+
 
 ``````
 

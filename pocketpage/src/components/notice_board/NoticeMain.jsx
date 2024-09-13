@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import database from '../../firebase';
 import './NoticeMain.css';
+import Sidebar from './Sidebar'; // 게시판 목록 컴포넌트
+import UserInfo from './UserInfo'; // 회원 정보 컴포넌트
+import PostTable from './PostTable'; // 게시글 목록 컴포넌트
+import PostForm from './PostForm'; // 글쓰기 폼 컴포넌트
 
 const NoticeMain = () => {
   const [posts, setPosts] = useState([]);
@@ -70,88 +74,40 @@ const NoticeMain = () => {
 
   return (
     <div className="notice-main">
-      <aside className="sidebar">
-        <h3>게시판 목록</h3>
-        <ul>
-          <li>공지사항</li>
-          <li>자유게시판</li>
-          <li>질문답변</li>
-          {/* Add more boards as needed */}
-        </ul>
-      </aside>
-
+      <Sidebar />
       <main className="content">
         <h2>게시판</h2>
-
-        {/* Show post form only if '글쓰기' button is clicked */}
         {showPostForm ? (
-          <div className="post-form">
-            <input
-              type="text"
-              placeholder="제목"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <textarea
-              placeholder="내용"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-            {isEditing ? (
-              <button onClick={handleSaveEdit}>저장</button>
-            ) : (
-              <button onClick={handleAddPost}>작성</button>
-            )}
-            <button onClick={() => setShowPostForm(false)}>취소</button>
-          </div>
-        ) : (
-          <button onClick={() => setShowPostForm(true)}>글쓰기</button>
-        )}
+  <PostForm
+    title={title}
+    content={content}
+    setTitle={setTitle}
+    setContent={setContent}
+    isEditing={isEditing}
+    handleSaveEdit={handleSaveEdit}
+    handleAddPost={handleAddPost}
+    setShowPostForm={setShowPostForm}
+  />
+) : (
+  <button 
+    onClick={() => {
+      setTitle(''); // 새 글 작성 시 제목 초기화
+      setContent(''); // 새 글 작성 시 내용 초기화
+      setShowPostForm(true); // 글쓰기 폼 표시
+    }}
+  >
+    글쓰기
+  </button>
+)}
 
-        {/* Post List */}
-        <table className="post-table">
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>제목</th>
-              <th>작성자</th>
-              <th>작성일</th>
-              <th>조회수</th>
-              <th>추천수</th>
-              <th>액션</th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts.length > 0 ? (
-              posts.map(([id, post], index) => (
-                <tr key={id}>
-                  <td>{index + 1}</td> {/* 번호 */}
-                  <td>{post.title}</td> {/* 제목 */}
-                  <td>{post.authorId}</td> {/* 작성자 */}
-                  <td>{new Date(post.date).toLocaleDateString()}</td> {/* 작성일 */}
-                  <td>{post.views}</td> {/* 조회수 */}
-                  <td>{post.recommendations}</td> {/* 추천수 */}
-                  <td>
-                    <button onClick={() => handleEditPost(id, post)}>수정</button>
-                    <button onClick={() => handleDeletePost(id)}>삭제</button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="7">게시물이 없습니다.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+
+        <PostTable
+          posts={posts}
+          handleEditPost={handleEditPost}
+          handleDeletePost={handleDeletePost}
+        />
       </main>
-
-      <aside className="user-info">
-        <h3>회원 정보</h3>
-        <button>로그인</button>
-        <button>회원가입</button>
-        {/* If logged in, display user information */}
-      </aside>
+      <UserInfo />
     </div>
   );
 };
