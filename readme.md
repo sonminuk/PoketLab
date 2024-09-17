@@ -77,6 +77,13 @@ pocketpage/
 │   │       ├── UserInfo.js           # 회원 정보 및 로그인/회원가입 버튼을 표시하는 컴포넌트
 │   │       ├── PostForm.js           # 글쓰기 및 수정 폼을 담당하는 컴포넌트
 │   │       ├── PostTable.js          # 게시글 목록을 테이블로 표시하는 컴포넌트
+│   │   └── user
+│   │       ├── UserMain.jsx          # 메인 유저 페이지
+│   │       ├── UserMain.css          # 메인 유저 페이지 스타일 시트
+│   │       ├── SignIn.js             # 로그인 컴포넌트
+│   │       ├── SignUp.js             # 회원가입 컴포넌트
+│   │       ├── MyPage.js             # 마이페이지 컴포넌트  (위의 게시판 페이지에서 게시판 작성 기능 제대로 구현할 때 댓글이나 본인 작성 글 관리)
+│   │       └── (여기서 세션 등 기능 추가 예정)
 │   ├── firebase.jsx           # Firebase 설정
 │   ├── App.jsx                # 앱의 메인 컴포넌트
 │   ├── App.css                # 스타일 시트
