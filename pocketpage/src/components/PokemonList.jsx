@@ -1,46 +1,47 @@
 // src/components/PokemonList.js
-import React from 'react';
+import React, { useState } from 'react';
+import './PokemonList.css'; // Ensure you have this CSS file for styling
 
 function PokemonList({ data }) {
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
+
+  const handleImageClick = (pokemon) => {
+    if (selectedPokemon && selectedPokemon.name === pokemon.name) {
+      setSelectedPokemon(null); // Close if already selected
+    } else {
+      setSelectedPokemon(pokemon); // Select new Pokémon
+    }
+  };
+
   return (
-    <div className="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>이미지</th>
-            <th>이름</th>
-            <th>타입</th>
-            <th>특성</th>
-            <th>HP</th>
-            <th>공격</th>
-            <th>방어</th>
-            <th>특수 공격</th>
-            <th>특수 방어</th>
-            <th>속도</th>
-            <th>총합</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(data).map((key) => {
-            const pokemon = data[key];
-            return (
-              <tr key={key}>
-                <td><img className="item-image" src={pokemon.img_href} alt={pokemon.name} /></td>
-                <td>{pokemon.name}</td>
-                <td>{pokemon.types}</td>
-                <td>{pokemon.abilities}</td>
-                <td>{pokemon.hp}</td>
-                <td>{pokemon.attack}</td>
-                <td>{pokemon.defense}</td>
-                <td>{pokemon.sp_attack}</td>
-                <td>{pokemon.sp_defense}</td>
-                <td>{pokemon.speed}</td>
-                <td>{pokemon.total}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="pokemon-gallery">
+      {Object.keys(data).map((key) => {
+        const pokemon = data[key];
+        return (
+          <div key={key} className="pokemon-card">
+            <img
+              className="item-image"
+              src={pokemon.img_href}
+              alt={pokemon.name}
+              onClick={() => handleImageClick(pokemon)}
+            />
+            {selectedPokemon && selectedPokemon.name === pokemon.name && (
+              <div className="pokemon-info">
+                <h3>{pokemon.name}</h3>
+                <p>타입: {pokemon.types}</p>
+                <p>특성: {pokemon.abilities}</p>
+                <p>HP: {pokemon.hp}</p>
+                <p>공격: {pokemon.attack}</p>
+                <p>방어: {pokemon.defense}</p>
+                <p>특수 공격: {pokemon.sp_attack}</p>
+                <p>특수 방어: {pokemon.sp_defense}</p>
+                <p>속도: {pokemon.speed}</p>
+                <p>총합: {pokemon.total}</p>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
