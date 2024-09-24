@@ -1,31 +1,78 @@
-.pokemon-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between cards */
+.table-container {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar, .dropdown {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+}
+
+.pokemon-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid layout */
+  gap: 20px;
+  justify-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.pokemon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #f8f8f8;
+}
+
+.pokemon-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-item.selected {
+  background-color: #e0ffe0; /* Slightly highlight the selected Pokémon */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain; /* Ensure images are not cropped */
+  margin-bottom: 10px;
+}
+
+.pokemon-info {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.pokemon-info p {
+  margin: 5px 0;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+  .pokemon-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust grid for small screens */
   }
-  
-  .pokemon-card {
-    cursor: pointer;
-    text-align: center;
+
+  .pokemon-image {
+    width: 100px;
+    height: 100px;
   }
-  
-  .item-image {
-    width: 150px; /* Set width for images */
-    height: auto; /* Maintain aspect ratio */
-    border: 2px solid #ccc; /* Add a border */
-    border-radius: 10px; /* Rounded corners */
-    transition: transform 0.2s; /* Smooth scale effect */
-  }
-  
-  .item-image:hover {
-    transform: scale(1.05); /* Scale effect on hover */
-  }
-  
-  .pokemon-info {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 5px; /* Space above info box */
-  }
-  
+}

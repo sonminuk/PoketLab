@@ -6,6 +6,7 @@ import MovesList from "./components/MovesList";
 import AbilitiesList from "./components/AbilitiesList";
 import NoticeMain from "./components/notice_board/NoticeMain"; // 공지 게시판
 import ToolsList from './components/ToolsList'; // 도구 목록 컴포넌트
+import Home from './Home'; 
 import "./App.css";
 
 function App() {
@@ -75,16 +76,5 @@ function App() {
   );
 }
 
-function Home() {
-  return (
-    <div>
-      <h2>환영합니다!</h2>
-      <p>
-        포켓랩에 오신 것을 환영합니다. 상단 메뉴를 이용해 각 페이지로
-        이동하세요.
-      </p>
-    </div>
-  );
-}
 
 export default App;
