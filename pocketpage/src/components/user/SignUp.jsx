@@ -4,63 +4,56 @@ import firebase from './UserFirebaseConfig'; // Firebase 초기화된 인스턴�
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // 에러 메시지 상태 변수
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignUp = async (e) => {
-    e.preventDefault();
-    setError(''); // 기존 에러 메시지 초기화
+    e.preventDefault(); // 기본 form 제출 동작 방지
+
+    // 비밀번호 길이 검사 (최소 6자 이상)
+    if (password.length < 6) {
+      setErrorMessage('비밀번호는 최소 6자 이상이어야 합니다.');
+      return;
+    }
 
     try {
-      // 이메일 형식이 잘못된 경우 사전 검증 (정규 표현식 사용)
-      if (!/\S+@\S+\.\S+/.test(email)) {
-        throw new Error("유효하지 않은 이메일 형식입니다.");
-      }
-
       const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
-      console.log("User signed up:", user);
+      console.log('User signed up:', user);
+      setErrorMessage(''); // 성공 시 에러 메시지 초기화
     } catch (error) {
-      // 에러를 catch하여 콘솔에 출력하지 않고, 커스텀 메시지 처리
-      if (error.code) {
-        switch (error.code) {
-          case 'auth/email-already-in-use':
-            setError('이미 등록된 이메일입니다.');
-            break;
-          case 'auth/invalid-email':
-            setError('유효하지 않은 이메일 형식입니다.');
-            break;
-          case 'auth/weak-password':
-            setError('비밀번호가 너무 짧습니다. 6자 이상 입력하세요.');
-            break;
-          default:
-            setError('회원가입에 실패했습니다. 다시 시도해주세요.');
-        }
+      // Firebase에서 발생하는 에러 처리
+      console.log("Error code:", error.code);
+      console.log("Error message:", error.message);
+
+      if (error.code === 'auth/email-already-in-use') {
+        setErrorMessage('이미 사용 중인 이메일입니다.');
+      } else if (error.code === 'auth/invalid-email') {
+        setErrorMessage('유효하지 않은 이메일 형식입니다.');
       } else {
-        // Firebase 외의 일반적인 에러 처리
-        setError(error.message);
+        setErrorMessage('회원가입에 실패했습니다. 다시 시도해주세요.');
       }
     }
   };
 
   return (
     <form onSubmit={handleSignUp}>
-      <input 
-        type="email" 
-        value={email} 
-        onChange={(e) => setEmail(e.target.value)} 
-        placeholder="Email" 
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
       />
-      <input 
-        type="password" 
-        value={password} 
-        onChange={(e) => setPassword(e.target.value)} 
-        placeholder="Password" 
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
       />
       <br />
       <button type="submit">회원가입</button>
 
-      {/* 커스텀 에러 메시지 출력 */}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {/* 에러 메시지 출력 */}
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </form>
   );
 };
