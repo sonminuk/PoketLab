@@ -1,11 +1,10 @@
 import React from 'react';
-
+import AuthPage from '../user/AuthPage';
 const UserInfo = () => {
   return (
     <aside className="user-info">
       <h3>회원 정보</h3>
-      <button>로그인</button>
-      <button>회원가입</button>
+      <AuthPage />
       {/* If logged in, display user information */}
     </aside>
   );
