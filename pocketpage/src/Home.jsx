@@ -1,13 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
+import SearchResults from './SearchResults';
+import database from './firebase';
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState({
+    pokemon: [],
+    items: [],
+    moves: [],
+    abilities: []
+  });
+  const [isSearching, setIsSearching] = useState(false);
+  const [pokemonData, setPokemonData] = useState({});
+  const [itemsData, setItemsData] = useState([]);
+  const [movesData, setMovesData] = useState({});
+  const [abilitiesData, setAbilitiesData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const pokemonRef = database.ref('pokemon');
+      const itemsRef = database.ref('items');
+      const movesRef = database.ref('moves');
+      const abilitiesRef = database.ref('abilities');
+
+      pokemonRef.on('value', (snapshot) => {
+        if (snapshot.exists()) {
+          setPokemonData(snapshot.val() || {});
+        }
+      });
+
+      itemsRef.on('value', (snapshot) => {
+        if (snapshot.exists()) {
+          const items = snapshot.val() || {};
+          const flatItems = Object.values(items).flatMap(category => 
+            typeof category === 'object' ? Object.values(category) : []
+          );
+          setItemsData(flatItems);
+        }
+      });
+
+      movesRef.on('value', (snapshot) => {
+        if (snapshot.exists()) {
+          setMovesData(snapshot.val() || {});
+        }
+      });
+
+      abilitiesRef.on('value', (snapshot) => {
+        if (snapshot.exists()) {
+          setAbilitiesData(snapshot.val() || {});
+        }
+      });
+    };
+
+    fetchData();
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Implement search functionality
-    console.log('Searching for:', searchTerm);
+    setIsSearching(true);
+    
+    const pokemonResults = Object.values(pokemonData).filter(pokemon => 
+      pokemon && pokemon.name && pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pokemon && pokemon.types && pokemon.types.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pokemon && pokemon.abilities && pokemon.abilities.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const itemResults = itemsData.filter(item =>
+      item && item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const moveResults = Object.values(movesData).filter(move =>
+      move && move.move_name && move.move_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const abilityResults = Object.values(abilitiesData).filter(ability =>
+      ability && ability.ability_name && ability.ability_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setSearchResults({
+      pokemon: pokemonResults,
+      items: itemResults,
+      moves: moveResults,
+      abilities: abilityResults
+    });
   };
 
   return (
@@ -19,7 +95,7 @@ function Home() {
           <form onSubmit={handleSearch} className="search-form">
             <input
               type="text"
-              placeholder="포켓몬 또는 기술 검색..."
+              placeholder="포켓몬, 도구, 기술, 특성 검색..."
               className="search-input"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -28,6 +104,8 @@ function Home() {
           </form>
         </div>
       </header>
+
+      {isSearching && <SearchResults results={searchResults} />}
 
       <main className="main-content">
         <section className="features">
