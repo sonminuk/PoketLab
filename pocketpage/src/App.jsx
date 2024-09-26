@@ -33,7 +33,7 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <h1>PokeLab</h1>
+          <h1>PocketLab</h1>
           <nav>
             <ul>
               <li>
