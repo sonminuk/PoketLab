@@ -89,6 +89,8 @@ pocketpage/
 │   │       └── (여기서 세션 등 기능 추가 예정)
 │   ├── Home.jsx           # 홈
 │   ├── Home.css           # 홈 디자인
+│   ├── PokemonTypeCalculator.jsx           # 포켓몬 타입계산기 컴포넌트
+│   ├── PokemonTypeCalculator.css           # 포켓몬 타입계산기 스타일 시트
 │   ├── firebase.jsx           # Firebase 설정
 │   ├── App.jsx                # 앱의 메인 컴포넌트
 │   ├── App.css                # 스타일 시트
