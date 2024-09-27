@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import SearchResults from './SearchResults';
 import database from './firebase';
@@ -122,13 +123,17 @@ function Home() {
             description="각 특성의 효과와 전략적 활용법을 상세히 설명합니다."
           />
           <FeatureCard
-            title="배틀 시뮬레이터"
-            description="다양한 포켓몬 조합으로 가상 배틀을 체험해보세요."
+            title="포켓몬 타입 계산기"
+            description="포켓몬 타입 상성을 쉽게 계산해보세요."
           />
           <FeatureCard
             title="커뮤니티 포럼"
             description="다른 트레이너들과 전략을 공유하고 토론하세요."
           />
+          <Link to="/pokemon-type-calculator" className="feature-card type-calculator-link">
+            <h3 className="feature-title">포켓몬 타입 계산기 사용하기</h3>
+            <p className="feature-description">포켓몬 타입 상성을 분석하고 최적의 전략을 세워보세요!</p>
+          </Link>
         </section>
 
         <section className="popular-content">
