@@ -94,7 +94,9 @@ pocketpage/
 │   ├── firebase.jsx           # Firebase 설정
 │   ├── App.jsx                # 앱의 메인 컴포넌트
 │   ├── App.css                # 스타일 시트
-│   └── index.js               # 엔트리 포인트
+│   ├── index.js               # 엔트리 포인트
+│   ├── SearchResults.jsx           # 홈 검색기능 컴포넌트
+│   └── SearchResults.css           # 홈 검색기능  스타일 시트
 │
 └── package.json               # 프로젝트 메타데이터 및 종속성
 

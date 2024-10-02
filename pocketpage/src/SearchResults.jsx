@@ -44,7 +44,7 @@ function SearchResults({ results }) {
                 <img src={item.img_href} alt={item.name} className="item-image" />
                 <h4 className="item-name">{item.name}</h4>
                 <p className="item-effect">{item.effect}</p>
-                <p className="item-rarity">희귀도: {item.rarity}</p>
+                <p className="item-rarity">{item.rarity}</p>
               </div>
             ))}
           </div>

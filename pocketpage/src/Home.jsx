@@ -4,6 +4,7 @@ import './Home.css';
 import SearchResults from './SearchResults';
 import database from './firebase';
 
+
 function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState({
@@ -70,6 +71,7 @@ function Home() {
     const itemResults = itemsData.filter(item =>
       item && item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    
 
     const moveResults = Object.values(movesData).filter(move =>
       move && move.move_name && move.move_name.toLowerCase().includes(searchTerm.toLowerCase())
