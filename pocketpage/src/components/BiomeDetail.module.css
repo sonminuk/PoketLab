@@ -1,0 +1,63 @@
+.biomeDetail {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.biomeContent {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.biomeTitle {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.biomeInfo {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.biomeImage {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.biomeDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.biomeNotFound {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #666;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .biomeInfo {
+    flex-direction: column;
+  }
+
+  .biomeImage {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 1rem;
+  }
+}
