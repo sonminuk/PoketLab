@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AuthObserver from './AuthObserver'; // 로그인 상태를 감지하여 UI를 변경
 import Login from './Login'; // 로그인 컴포넌트
 import SignUp from './SignUp'; // 회원가입 컴포넌트
-import firebase from './firebaseConfig'; // Firebase 초기화된 인스턴스 가져오기
+import firebase from './FirebaseConfig'; // Firebase 초기화된 인스턴스 가져오기
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true); // 로그인/회원가입 상태 전환
