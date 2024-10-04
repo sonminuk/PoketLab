@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import firebase from './firebaseConfig'; // Firebase 초기화된 인스턴스 가져오기
+import firebase from './FirebaseConfig'; // Firebase 초기화된 인스턴스 가져오기
 
 const AuthObserver = ({ setUser }) => {
   // Firebase Authentication의 상태 변화를 감지
