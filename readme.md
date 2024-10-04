@@ -72,6 +72,8 @@ pocketpage/
 │   │   ├── PokemonList.jsx    # 포켓몬 목록 컴포넌트
 │   │   ├── ToolsList.jsx    # 도구 컴포넌트
 │   │   ├── ToolPage.css    # 도구 페이지 스타일 시트 
+│   │   ├── AbilitiesList.css  # 특성 목록  스타일 시트
+│   │   ├── MovesList.css      # 기술 목록 스타일 시트
 │   │   ├── PokemonList.css    # 포켓몬 목록 페이지 스타일 시트 
 │   │   └── notice_board/
 │   │       ├── NoticeMain.jsx        # 메인 게시판 페이지

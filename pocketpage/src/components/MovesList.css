@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --primary-color: #ffcb05;
+  --secondary-color: #3d7dca;
+  --tertiary-color: #003a70;
+  --background-color: #f0f0f0;
+  --text-color: #333;
+}
+
+.moves-list-container {
+  font-family: 'Press Start 2P', cursive;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  border-radius: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  flex-grow: 1;
+  margin-left: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  background-color: white;
+  color: var(--text-color);
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid var(--background-color);
+}
+
+th {
+  background-color: var(--secondary-color);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+th:first-child {
+  border-top-left-radius: 10px;
+}
+
+th:last-child {
+  border-top-right-radius: 10px;
+}
+
+th:hover {
+  background-color: var(--tertiary-color);
+}
+
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+tr:hover {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  transition: background-color 0.3s ease;
+}
+
+.move-class-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+tr:hover .move-class-image {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: var(--tertiary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  margin: 0 15px;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+/* Pokéball loader */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+/* Type badges */
+.type-badge {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+.type-normal { background-color: #A8A878; }
+.type-fire { background-color: #F08030; }
+.type-water { background-color: #6890F0; }
+.type-grass { background-color: #78C850; }
+.type-electric { background-color: #F8D030; }
+.type-ice { background-color: #98D8D8; }
+.type-fighting { background-color: #C03028; }
+.type-poison { background-color: #A040A0; }
+.type-ground { background-color: #E0C068; }
+.type-flying { background-color: #A890F0; }
+.type-psychic { background-color: #F85888; }
+.type-bug { background-color: #A8B820; }
+.type-rock { background-color: #B8A038; }
+.type-ghost { background-color: #705898; }
+.type-dragon { background-color: #7038F8; }
+.type-dark { background-color: #705848; }
+.type-steel { background-color: #B8B8D0; }
+.type-fairy { background-color: #EE99AC; }
+
+@media (max-width: 768px) {
+  .moves-list-container {
+    padding: 10px;
+  }
+
+  th, td {
+    padding: 10px;
+    font-size: 10px;
+  }
+
+  .search-input {
+    font-size: 12px;
+  }
+
+  .pagination button {
+    padding: 8px 16px;
+    font-size: 10px;
+  }
+}
