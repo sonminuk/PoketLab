@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../user/FirebaseConfig';
 
-const PostList = ({ user }) => {
+const PostList = ({ user, board }) => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const postRef = firebase.database().ref('post2');
-      postRef.on('value', (snapshot) => {
+      const postRef = firebase.database().ref('posts');
+      postRef.orderByChild('board').equalTo(board).on('value', (snapshot) => {
         const postArray = [];
         snapshot.forEach((childSnapshot) => {
           const post = childSnapshot.val();
@@ -23,9 +23,9 @@ const PostList = ({ user }) => {
     fetchPosts();
 
     return () => {
-      firebase.database().ref('post2').off();
+      firebase.database().ref('posts').off();
     };
-  }, []);
+  }, [board]);
 
   const handlePostClick = (postId) => {
     if (user) {
@@ -37,10 +37,10 @@ const PostList = ({ user }) => {
 
   return (
     <div>
-      <h2>게시글 목록</h2>
+      <h2>{board} 게시글 목록</h2>
       <hr />
       <div style={{ display: 'grid', gridTemplateColumns: '50px 1fr 200px 150px 80px 80px 80px', gap: '10px' }}>
-        <div><strong>게시글번호</strong></div>
+        <div><strong>번호</strong></div>
         <div><strong>제목</strong></div>
         <div><strong>작성자</strong></div>
         <div><strong>작성시간</strong></div>
@@ -61,7 +61,7 @@ const PostList = ({ user }) => {
             <div>{index + 1}</div>
             <div>{post.title}</div>
             <div>{post.author && post.author.email ? post.author.email : '알 수 없음'}</div>
-            <div>{post.createdAt}</div>
+            <div>{new Date(post.createdAt).toLocaleString()}</div>
             <div>{post.views || 0}</div>
             <div>{post.likes || 0}</div>
             <div>{post.dislikes || 0}</div>

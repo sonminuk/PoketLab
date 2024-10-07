@@ -15,7 +15,7 @@ const PostDetail = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const postRef = firebase.database().ref(`post2/${postId}`);
+      const postRef = firebase.database().ref(`posts/${postId}`);
       postRef.once('value', (snapshot) => {
         setPost(snapshot.val());
       });
@@ -41,14 +41,14 @@ const PostDetail = () => {
 
   const handleLike = async () => {
     if (post && uid) {
-      const postRef = firebase.database().ref(`post2/${postId}/likes`);
+      const postRef = firebase.database().ref(`posts/${postId}/likes`);
       await postRef.transaction((currentLikes) => (currentLikes || 0) + 1);
     }
   };
 
   const handleDislike = async () => {
     if (post && uid) {
-      const postRef = firebase.database().ref(`post2/${postId}/dislikes`);
+      const postRef = firebase.database().ref(`posts/${postId}/dislikes`);
       await postRef.transaction((currentDislikes) => (currentDislikes || 0) + 1);
     }
   };
@@ -98,7 +98,7 @@ const PostDetail = () => {
         <button onClick={handleLike} style={styles.button}>추천</button>
         <button onClick={handleDislike} style={styles.button}>비추천</button>
         {uid && post.author && post.author.uid === uid && (
-          <button onClick={navigateToEdit} style={styles.button}>수정</button>
+          <button onClick={navigateToEdit} style={styles.button}>수정/삭제</button>
         )}
       </div>
       <h3>댓글 [{comments.length}]</h3>

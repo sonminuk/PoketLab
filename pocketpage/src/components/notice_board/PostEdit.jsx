@@ -16,7 +16,7 @@ const PostEdit = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const postRef = firebase.database().ref(`post2/${postId}`);
+        const postRef = firebase.database().ref(`posts/${postId}`);
         const snapshot = await postRef.once('value');
         const data = snapshot.val();
         if (data && data.author && data.author.uid === uid) {
@@ -50,7 +50,7 @@ const PostEdit = () => {
     };
 
     try {
-      const postRef = firebase.database().ref(`post2/${postId}`);
+      const postRef = firebase.database().ref(`posts/${postId}`);
       await postRef.update(updatedPost);
       navigate(`/post/${postId}`, { state: { uid, email } });
     } catch (error) {
@@ -62,9 +62,16 @@ const PostEdit = () => {
   const handleDelete = async () => {
     if (window.confirm('게시글을 삭제하시겠습니까?')) {
       try {
-        const postRef = firebase.database().ref(`post2/${postId}`);
+        const postRef = firebase.database().ref(`posts/${postId}`);
+        const commentsRef = firebase.database().ref(`comments/${postId}`);
+
+        // 게시글 삭제
         await postRef.remove();
-        navigate('/', { state: { uid, email } });
+
+        // 댓글 삭제
+        await commentsRef.remove();
+
+        navigate('/notice', { state: { uid, email } });
       } catch (error) {
         console.error('게시글 삭제 중 오류가 발생했습니다:', error.message);
         setError('게시글 삭제 중 오류가 발생했습니다.');

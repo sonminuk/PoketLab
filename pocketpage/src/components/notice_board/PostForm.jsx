@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // useNavigate와 useLocation 사용
-import firebase from '../user/FirebaseConfig'; // Firebase 초기화된 인스턴스 가져오기
+import { useNavigate, useLocation } from 'react-router-dom';
+import firebase from '../user/FirebaseConfig';
 
 const PostForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const navigate = useNavigate(); // useNavigate 사용
-  const location = useLocation(); // 현재 location 가져오기
-  const user = location.state; // 사용자 정보를 location.state에서 가져오기
+  const [selectedBoard, setSelectedBoard] = useState('공지사항');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = location.state;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,17 +31,20 @@ const PostForm = () => {
         email: user.email,
       },
       createdAt: new Date().toISOString(),
+      board: selectedBoard,
+      views: 0,
+      likes: 0,
+      dislikes: 0,
     };
 
     try {
-      const newPostRef = firebase.database().ref('post2').push();
+      const newPostRef = firebase.database().ref('posts').push();
       await newPostRef.set(postData);
       setTitle('');
       setContent('');
       console.log('게시글이 성공적으로 작성되었습니다.');
 
-      // 게시글 작성 후 NoticeMain 페이지로 돌아감
-      navigate('/notice'); // 메인 페이지로 돌아가기
+      navigate('/notice');
     } catch (error) {
       console.error('게시글 작성 중 오류가 발생했습니다:', error.message);
     }
@@ -48,6 +52,20 @@ const PostForm = () => {
 
   return (
     <form onSubmit={handleSubmit} style={styles.formContainer}>
+      <div style={styles.boardSelector}>
+        <label htmlFor="board-select">게시판 선택: </label>
+        <select
+          id="board-select"
+          value={selectedBoard}
+          onChange={(e) => setSelectedBoard(e.target.value)}
+          style={styles.select}
+        >
+          <option value="공지사항">공지사항</option>
+          <option value="정보">정보</option>
+          <option value="질문">질문</option>
+          <option value="일반">일반</option>
+        </select>
+      </div>
       <div style={styles.titleContainer}>
         <h2>제목</h2>
         <input
