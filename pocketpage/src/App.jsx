@@ -13,6 +13,7 @@ import PokemonTypeCalculator from './PokemonTypeCalculator';
 import PostForm from "./components/notice_board/PostForm";// 게시판 작성 컴포넌트
 import PostDetail from "./components/notice_board/PostDetail";// 게시판 조회 컴포넌트
 import PostEdit from './components/notice_board/PostEdit'; // 게시판 수정 컴포넌트
+import MyPage from './components/notice_board/MyPage'; // 마이페이지 컴포넌트
 import User from './components/user/userMain'; // 유저 컴포넌트
 import "./App.css";
 
@@ -76,6 +77,7 @@ function App() {
           <Route path="/" element={<NoticeMain />} />
           <Route path="/post/:postId" element={<PostDetail />} /> 
           <Route path="/postedit/:postId" element={<PostEdit />} /> 
+          <Route path="/mypage" element={<MyPage />} />   {/* 마이 페이지 라우트 추가 */}
           {/* 유저 페이지 라우트 추가 */}
           <Route path="/user" element={<User />} />
         </Routes>
