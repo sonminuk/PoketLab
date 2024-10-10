@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBook,
+  faBolt,
+  faStar,
+  faMap,
+  faToolbox,
+  faUsers,
+  faCalculator,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
 import SearchResults from "./SearchResults";
 import database from "./firebase";
@@ -133,49 +144,55 @@ function Home() {
           <FeatureCard
             title="포켓몬 도감"
             description="모든 포켓몬의 상세 정보, 진화 계통, 출현 위치 등을 확인하세요."
+            icon={faBook}
           />
           <FeatureCard
             title="기술 데이터베이스"
             description="모든 기술의 상세 정보, 효과, 학습 가능한 포켓몬 목록을 제공합니다."
+            icon={faBolt}
           />
           <FeatureCard
             title="특성 가이드"
             description="각 특성의 효과와 전략적 활용법을 상세히 설명합니다."
+            icon={faStar}
+          />
+          <FeatureCard
+            title="바이옴 가이드"
+            description="맵의 설명과 방향성을 제시해줍니다."
+            icon={faMap}
+          />
+          <FeatureCard
+            title="도구 가이드"
+            description="각 도구의 효과를 상세히 설명합니다."
+            icon={faToolbox}
           />
           <FeatureCard
             title="커뮤니티 포럼"
             description="다른 트레이너들과 전략을 공유하고 토론하세요."
+            icon={faUsers}
           />
-          <Link
-            to="/pokemon-type-calculator"
-            className="feature-card type-calculator-link"
-          >
-            <h3 className="feature-title">포켓몬 타입 계산기 사용하기</h3>
-            <p className="feature-description">
-              포켓몬 타입 상성을 분석하고 최적의 전략을 세워보세요!
-            </p>
-          </Link>
-        </section>
-
-        <section className="popular-content">
-          <h2 className="section-title">포켓 로그 인기 콘텐츠</h2>
-          <div className="content-grid">
-            <PopularContent title="이번 주 최강 포켓몬 TOP 10" />
-            <PopularContent title="메타 대응 가이드" />
-            <PopularContent title="초보자를 위한 팁 모음" />
-            <PopularContent title="히든 아이템 위치 총정리" />
-          </div>
+          <FeatureCard
+            title="포켓몬 타입 계산기"
+            description="포켓몬 타입 상성을 분석하고 최적의 전략을 세워보세요!"
+            icon={faCalculator}
+          />
         </section>
 
         <section className="cta-section">
-          <h2 className="section-title">포켓 로그 시작하기</h2>
-          <p>지금 바로 포켓 로그를 시작하고 최고의 트레이너가 되어보세요!</p>
-          <button
-            className="cta-button"
-            onClick={() => window.open("https://pokerogue.net/", "_blank")}
-          >
-            지금 시작하기
-          </button>
+          <div className="cta-content">
+            <h2 className="section-title">포켓 로그 시작하기</h2>
+            <p className="cta-description">
+              지금 바로 포켓 로그를 시작하고 최고의 트레이너가 되어보세요!
+            </p>
+            <button
+              className="cta-button"
+              onClick={() => window.open("https://pokerogue.net/", "_blank")}
+            >
+              <span className="button-text">지금 시작하기</span>
+              <FontAwesomeIcon icon={faArrowRight} className="button-icon" />
+            </button>
+          </div>
+
         </section>
       </main>
 
@@ -188,20 +205,12 @@ function Home() {
   );
 }
 
-function FeatureCard({ title, description }) {
+function FeatureCard({ title, description, icon }) {
   return (
     <div className="feature-card">
+      <FontAwesomeIcon icon={icon} className="feature-icon" />
       <h3 className="feature-title">{title}</h3>
       <p className="feature-description">{description}</p>
-    </div>
-  );
-}
-
-function PopularContent({ title }) {
-  return (
-    <div className="popular-content-card">
-      <h3 className="content-title">{title}</h3>
-      <button className="content-button">자세히 보기</button>
     </div>
   );
 }

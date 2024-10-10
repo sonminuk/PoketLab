@@ -1,0 +1,133 @@
+/* App.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+.App {
+  --sidebar-width: 300px;
+
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-right 0.3s ease-in-out;
+}
+
+.content.sidebarOpen {
+  margin-right: var(--sidebar-width);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: calc(-1 * var(--sidebar-width));
+  width: var(--sidebar-width);
+  height: 100vh;
+  background-color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebarHeader {
+  padding: 20px;
+  background-color: #6200ea;
+  color: white;
+}
+
+.sidebarHeader h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.sidebarNav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebarNav li {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebarNav li:last-child {
+  border-bottom: none;
+}
+
+.sidebarNav li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.sidebarNav li a:hover,
+.sidebarNav li.active a {
+  background-color: #f0f0f0;
+  color: #6200ea;
+}
+
+.sidebarToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  background-color: #6200ea;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.sidebarToggle:hover {
+  background-color: #9d46ff;
+}
+
+.sidebarToggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 2px 0;
+  transition: 0.3s;
+}
+
+.sidebar.open + .content .sidebarToggle span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.sidebar.open + .content .sidebarToggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.sidebar.open + .content .sidebarToggle span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    right: -100%;
+  }
+  
+  .content.sidebarOpen {
+    margin-right: 0;
+  }
+}
