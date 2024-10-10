@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css';
-import SearchResults from './SearchResults';
-import database from './firebase';
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./Home.css";
+import SearchResults from "./SearchResults";
+import database from "./firebase";
 
 function Home() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
     pokemon: [],
     items: [],
     moves: [],
-    abilities: []
+    abilities: [],
   });
   const [isSearching, setIsSearching] = useState(false);
   const [pokemonData, setPokemonData] = useState({});
@@ -21,34 +20,34 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const pokemonRef = database.ref('pokemon');
-      const itemsRef = database.ref('items');
-      const movesRef = database.ref('moves');
-      const abilitiesRef = database.ref('abilities');
+      const pokemonRef = database.ref("pokemon");
+      const itemsRef = database.ref("items");
+      const movesRef = database.ref("moves");
+      const abilitiesRef = database.ref("abilities");
 
-      pokemonRef.on('value', (snapshot) => {
+      pokemonRef.on("value", (snapshot) => {
         if (snapshot.exists()) {
           setPokemonData(snapshot.val() || {});
         }
       });
 
-      itemsRef.on('value', (snapshot) => {
+      itemsRef.on("value", (snapshot) => {
         if (snapshot.exists()) {
           const items = snapshot.val() || {};
-          const flatItems = Object.values(items).flatMap(category => 
-            typeof category === 'object' ? Object.values(category) : []
+          const flatItems = Object.values(items).flatMap((category) =>
+            typeof category === "object" ? Object.values(category) : []
           );
           setItemsData(flatItems);
         }
       });
 
-      movesRef.on('value', (snapshot) => {
+      movesRef.on("value", (snapshot) => {
         if (snapshot.exists()) {
           setMovesData(snapshot.val() || {});
         }
       });
 
-      abilitiesRef.on('value', (snapshot) => {
+      abilitiesRef.on("value", (snapshot) => {
         if (snapshot.exists()) {
           setAbilitiesData(snapshot.val() || {});
         }
@@ -61,31 +60,46 @@ function Home() {
   const handleSearch = (e) => {
     e.preventDefault();
     setIsSearching(true);
-    
-    const pokemonResults = Object.values(pokemonData).filter(pokemon => 
-      pokemon && pokemon.name && pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pokemon && pokemon.types && pokemon.types.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pokemon && pokemon.abilities && pokemon.abilities.toLowerCase().includes(searchTerm.toLowerCase())
+
+    const pokemonResults = Object.values(pokemonData).filter(
+      (pokemon) =>
+        (pokemon &&
+          pokemon.name &&
+          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (pokemon &&
+          pokemon.types &&
+          pokemon.types.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (pokemon &&
+          pokemon.abilities &&
+          pokemon.abilities.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
-    const itemResults = itemsData.filter(item =>
-      item && item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
-
-    const moveResults = Object.values(movesData).filter(move =>
-      move && move.move_name && move.move_name.toLowerCase().includes(searchTerm.toLowerCase())
+    const itemResults = itemsData.filter(
+      (item) =>
+        item &&
+        item.name &&
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const abilityResults = Object.values(abilitiesData).filter(ability =>
-      ability && ability.ability_name && ability.ability_name.toLowerCase().includes(searchTerm.toLowerCase())
+    const moveResults = Object.values(movesData).filter(
+      (move) =>
+        move &&
+        move.move_name &&
+        move.move_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const abilityResults = Object.values(abilitiesData).filter(
+      (ability) =>
+        ability &&
+        ability.ability_name &&
+        ability.ability_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     setSearchResults({
       pokemon: pokemonResults,
       items: itemResults,
       moves: moveResults,
-      abilities: abilityResults
+      abilities: abilityResults,
     });
   };
 
@@ -93,7 +107,9 @@ function Home() {
     <div className="home">
       <header className="home-header">
         <div className="container">
-          <h1 className="title">포켓 로그 전략 가이드에 오신 것을 환영합니다!</h1>
+          <h1 className="title">
+            포켓 로그 전략 가이드에 오신 것을 환영합니다!
+          </h1>
           <p className="subtitle">포켓몬 마스터가 되기 위한 최고의 가이드</p>
           <form onSubmit={handleSearch} className="search-form">
             <input
@@ -103,7 +119,9 @@ function Home() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button type="submit" className="search-button">검색</button>
+            <button type="submit" className="search-button">
+              검색
+            </button>
           </form>
         </div>
       </header>
@@ -125,16 +143,17 @@ function Home() {
             description="각 특성의 효과와 전략적 활용법을 상세히 설명합니다."
           />
           <FeatureCard
-            title="포켓몬 타입 계산기"
-            description="포켓몬 타입 상성을 쉽게 계산해보세요."
-          />
-          <FeatureCard
             title="커뮤니티 포럼"
             description="다른 트레이너들과 전략을 공유하고 토론하세요."
           />
-          <Link to="/pokemon-type-calculator" className="feature-card type-calculator-link">
+          <Link
+            to="/pokemon-type-calculator"
+            className="feature-card type-calculator-link"
+          >
             <h3 className="feature-title">포켓몬 타입 계산기 사용하기</h3>
-            <p className="feature-description">포켓몬 타입 상성을 분석하고 최적의 전략을 세워보세요!</p>
+            <p className="feature-description">
+              포켓몬 타입 상성을 분석하고 최적의 전략을 세워보세요!
+            </p>
           </Link>
         </section>
 
@@ -155,7 +174,7 @@ function Home() {
             className="cta-button"
             onClick={() => window.open("https://pokerogue.net/", "_blank")}
           >
-            무료로 시작하기
+            지금 시작하기
           </button>
         </section>
       </main>
