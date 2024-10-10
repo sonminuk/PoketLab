@@ -1,12 +1,12 @@
 /* NoticeMain 컴포넌트의 전체 컨테이너 */
-.container {
+.noticeMainContainer {
   padding: 20px;
   background-color: #f7f7f7;
   min-height: 100vh;
 }
 
 /* 로그아웃 버튼 스타일 */
-.logoutButton {
+.noticeMainLogoutButton {
   margin-top: 10px;
   background-color: #ff4b5c;
   color: #fff;
@@ -17,9 +17,9 @@
 }
 
 /* 게시글 작성 버튼 스타일 */
-.writeButton {
+.noticeMainWriteButton {
   margin-top: 10px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -29,7 +29,7 @@
 }
 
 /* 마이페이지 링크 버튼 스타일 */
-.myPageLink {
+.noticeMainMyPageLink {
   margin-left: 10px;
   padding: 10px 20px;
   background-color: #3498db;
@@ -40,14 +40,14 @@
 }
 
 /* 게시판 네비게이션 컨테이너 */
-.boardNavigation {
+.noticeMainBoardNavigation {
   display: flex;
   justify-content: center;
   margin: 20px 0;
 }
 
 /* 게시판 버튼 스타일 */
-.boardButton {
+.noticeMainBoardButton {
   margin: 0 5px;
   padding: 10px 20px;
   background-color: #ddd;
@@ -57,10 +57,10 @@
 }
 
 /* 활성화된 게시판 버튼 스타일 */
-.activeBoardButton {
+.noticeMainActiveBoardButton {
   margin: 0 5px;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   border: none;
   border-radius: 5px;
