@@ -41,7 +41,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4dML4mNptaZKNRk")} // 평원 바이옴으로 이동
                 />
-                <p>평야</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -59,21 +59,21 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4ggXGD9JQfUXBsw")} // 평원 바이옴으로 이동
                 />
-                <p>대도시</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_lake_bg.png?w=200&tok=6412b2" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="호수"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5wAF7BKWCD-L80K")} // 평원 바이옴으로 이동
                 />
-                <p>호수</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_meadow_bg.png?w=200&tok=abadd6" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="목초지"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5UnF8ytICUkEynn")} // 평원 바이옴으로 이동
                 />
-                <p>목초지</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4k2wAnVygUkZwLk")} // 평원 바이옴으로 이동
                 />
-                <p>슬럼</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4nQXAR05MavSrJi")} // 평원 바이옴으로 이동
                 />
-                <p>공사장</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -127,14 +127,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4uM3-iK97mvmH0I")} // 평원 바이옴으로 이동
                 />
-                <p>발전소</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_dojo_bg.png?w=200&tok=64b819" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="도장"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4r80-YwiyHHkGgC")} // 평원 바이옴으로 이동
                 />
-                <p>도장</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -152,14 +152,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4dML4mNptaZKNRk")} // 평원 바이옴으로 이동
                 />
-                <p>평야</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_temple_bg.png?w=200&tok=bccd04" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="사원"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5HFC2JPibz6kKCq")} // 평원 바이옴으로 이동
                 />
-                <p>사원</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4xoqKMH4qhvEqeH")} // 평원 바이옴으로 이동
                 />
-                <p>공장</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -195,14 +195,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4dML4mNptaZKNRk")} // 평원 바이옴으로 이동
                 />
-                <p>평야</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_laboratory_bg.png?w=200&tok=9f664a" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="연구소"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ50AUaGT6tngBfuO")} // 평원 바이옴으로 이동
                 />
-                <p>연구소</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -220,7 +220,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4nQXAR05MavSrJi")} // 평원 바이옴으로 이동
                 />
-                <p>공사장</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -238,7 +238,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ56w_oZgogr_iE7Q")} // 평원 바이옴으로 이동
                 />
-                <p>높은 풀숲</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -256,14 +256,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5Abn4m4LLXmCpAK")} // 평원 바이옴으로 이동
                 />
-                <p>숲</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_cave_bg.png?w=200&tok=905d8b" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="동굴"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5spz3_Si3ALNwfm")} // 평원 바이옴으로 이동
                 />
-                <p>동굴</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -281,14 +281,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5UnF8ytICUkEynn")} // 평원 바이옴으로 이동
                 />
-                <p>목초지</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_jungle_bg.png?w=200&tok=98f88a" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="정글"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5DwTTDqS2w5myk7")} // 평원 바이옴으로 이동
                 />
-                <p>정글</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -306,7 +306,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5HFC2JPibz6kKCq")} // 평원 바이옴으로 이동
                 />
-                <p>사원</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -324,14 +324,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5KcNwKnaPabP2HP")} // 평원 바이옴으로 이동
                 />
-                <p>늪지</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_anicent_ruins_bg.png?w=200&tok=fc35a1" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="고대 유적"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5eIts5L2SDx8FPt")} // 평원 바이옴으로 이동
                 />
-                <p>고대 유적</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -349,14 +349,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ56w_oZgogr_iE7Q")} // 평원 바이옴으로 이동
                 />
-                <p>높은 풀숲</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_graveyard_bg.png?w=200&tok=2bfd03" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="묘지"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5NwpN8yO9WnbmKC")} // 평원 바이옴으로 이동
                 />
-                <p>묘지</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -374,7 +374,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5RRbrmX9_-4XgPe")} // 평원 바이옴으로 이동
                 />
-                <p>심연</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -392,21 +392,21 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5spz3_Si3ALNwfm")} // 평원 바이옴으로 이동
                 />
-                <p>동굴</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_space_bg.png?w=200&tok=1174bc" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="우주"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5aylXCA-fopG9q0")} // 평원 바이옴으로 이동
                 />
-                <p>우주</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_wasteland_bg.png?w=200&tok=313dd2" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="황무지"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5hdokWHJXSvDsL0")} // 평원 바이옴으로 이동
                 />
-                <p>황무지</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -424,14 +424,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4dML4mNptaZKNRk")} // 평원 바이옴으로 이동
                 />
-                <p>평야</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_fairy_cave_bg.png?w=200&tok=45194c" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="페어리 동굴"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5Y4T83tw0e-R-sc")} // 평원 바이옴으로 이동
                 />
-                <p>페어리 동굴</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -449,14 +449,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6IgYapZEmCU6O1x")} // 평원 바이옴으로 이동
                 />
-                <p>얼음 동굴</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_space_bg.png?w=200&tok=1174bc" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="우주"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5aylXCA-fopG9q0")} // 평원 바이옴으로 이동
                 />
-                <p>우주</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -474,7 +474,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5eIts5L2SDx8FPt")} // 평원 바이옴으로 이동
                 />
-                <p>고대 유적</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -492,7 +492,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5Abn4m4LLXmCpAK")} // 평원 바이옴으로 이동
                 />
-                <p>숲</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -510,7 +510,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5lzzbTm0GAIprxf")} // 평원 바이옴으로 이동
                 />
-                <p>악지</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -528,14 +528,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5pR4ieAe9fDLeBx")} // 평원 바이옴으로 이동
                 />
-                <p>사막</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_mountain_bg.png?w=200&tok=e1c9f3" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="산"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6C3lheTN_zYbwL6")} // 평원 바이옴으로 이동
                 />
-                <p>산</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -553,7 +553,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5eIts5L2SDx8FPt")} // 평원 바이옴으로 이동
                 />
-                <p>고대 유적</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -571,21 +571,21 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5wAF7BKWCD-L80K")} // 평원 바이옴으로 이동
                 />
-                <p>호수</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_badlands_bg.png?w=200&tok=37d070" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="악지"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5lzzbTm0GAIprxf")} // 평원 바이옴으로 이동
                 />
-                <p>악지</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_laboratory_bg.png?w=200&tok=9f664a" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="연구소"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ50AUaGT6tngBfuO")} // 평원 바이옴으로 이동
                 />
-                <p>연구소</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -603,21 +603,21 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5zbDXNOtgnAFmwJ")} // 평원 바이옴으로 이동
                 />
-                <p>해변</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_swamp_bg.png?w=200&tok=8313ed" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="늪지"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5KcNwKnaPabP2HP")} // 평원 바이옴으로 이동
                 />
-                <p>늪지</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_construction_site_bg.png?w=200&tok=82d8f4" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="공사장"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ4nQXAR05MavSrJi")} // 평원 바이옴으로 이동
                 />
-                <p>공사장</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -635,14 +635,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ65As1kBcNsFuJ3k")} // 평원 바이옴으로 이동
                 />
-                <p>바다</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_island_bg.png?w=200&tok=c2ebfe" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="섬"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ61rlKeaugbepNAn")} // 평원 바이옴으로 이동
                 />
-                <p>섬</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -660,7 +660,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ65As1kBcNsFuJ3k")} // 평원 바이옴으로 이동
                 />
-                <p>바다</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -678,14 +678,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ68bZgwZLLT-tcnF")} // 평원 바이옴으로 이동
                 />
-                <p>해저</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_ice_cave_bg.png?w=200&tok=7620c7" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="얼음 동굴"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6IgYapZEmCU6O1x")} // 평원 바이옴으로 이동
                 />
-                <p>얼음 동굴</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -703,14 +703,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5spz3_Si3ALNwfm")} // 평원 바이옴으로 이동
                 />
-                <p>동굴</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_volcano_bg.png?w=200&tok=430720" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="화산"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6FIBX7r00x1sK7a")} // 평원 바이옴으로 이동
                 />
-                <p>화산</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -728,14 +728,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6FIBX7r00x1sK7a")} // 평원 바이옴으로 이동
                 />
-                <p>화산</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_wasteland_bg.png?w=200&tok=313dd2" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="황무지"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5hdokWHJXSvDsL0")} // 평원 바이옴으로 이동
                 />
-                <p>황무지</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -753,14 +753,14 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5zbDXNOtgnAFmwJ")} // 평원 바이옴으로 이동
                 />
-                <p>해변</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_ice_cave_bg.png?w=200&tok=7620c7" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="얼음 동굴"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6IgYapZEmCU6O1x")} // 평원 바이옴으로 이동
                 />
-                <p>얼음 동굴</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -778,7 +778,7 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6LvAYze4cJg-mYG")} // 평원 바이옴으로 이동
                 />
-                <p>눈덮인 숲</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -796,21 +796,21 @@ function BiomeDetail({ data }) {
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5Abn4m4LLXmCpAK")} // 평원 바이옴으로 이동
                 />
-                <p>숲</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_lake_bg.png?w=200&tok=6412b2" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="호수"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ5wAF7BKWCD-L80K")} // 평원 바이옴으로 이동
                 />
-                <p>호수</p>
+                <p></p>
                 <img
                   src="https://wiki.pokerogue.net/_media/ko:biomes:ko_mountain_bg.png?w=200&tok=e1c9f3" // 평원 바이옴 이미지 URL을 여기에 넣어주세요
                   alt="산"
                   className={styles.linkedBiomeImage}
                   onClick={() => goToBiome("-O8MJ6C3lheTN_zYbwL6")} // 평원 바이옴으로 이동
                 />
-                <p>산</p>
+                <p></p>
               </div>
             </div>
           </div>

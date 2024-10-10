@@ -13,7 +13,7 @@
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   padding: 2rem;
-  max-width: 800px;
+  max-width: 1200px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -60,4 +60,26 @@
     max-width: 300px;
     margin: 0 auto 1rem;
   }
+}
+
+.additionalImagesContainer {
+  text-align: center;
+}
+
+.additionalImagesGrid {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.linkedBiomeCard {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.linkedBiomeImage {
+  text-align: center;
+  margin-top: 40px;
+  cursor: pointer;
 }
