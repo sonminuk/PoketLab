@@ -131,3 +131,44 @@
     margin-right: 0;
   }
 }
+
+
+/* 기존 스타일에 추가 */
+/* 기존 스타일에 추가 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: #c77823;
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  height: 70px; /* 로고 크기 증가 */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* content 여백 조정 */
+.content {
+  margin-top: 80px; /* header의 height와 동일하게 설정 */
+  /* 기존 스타일 유지 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .logo {
+    height: 60px;
+  }
+}

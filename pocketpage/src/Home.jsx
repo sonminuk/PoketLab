@@ -114,6 +114,15 @@ function Home() {
     });
   };
 
+  function FeatureCard({ title, icon, path }) {
+    return (
+      <Link to={path} className="feature-card">
+        <FontAwesomeIcon icon={icon} className="feature-icon" />
+        <h3 className="feature-title">{title}</h3>
+      </Link>
+    );
+  }
+
   return (
     <div className="home">
       <header className="home-header">
@@ -139,42 +148,19 @@ function Home() {
 
       {isSearching && <SearchResults results={searchResults} />}
 
+
       <main className="main-content">
         <section className="features">
-          <FeatureCard
-            title="포켓몬 도감"
-            description="모든 포켓몬의 상세 정보, 진화 계통, 출현 위치 등을 확인하세요."
-            icon={faBook}
-          />
-          <FeatureCard
-            title="기술 데이터베이스"
-            description="모든 기술의 상세 정보, 효과, 학습 가능한 포켓몬 목록을 제공합니다."
-            icon={faBolt}
-          />
-          <FeatureCard
-            title="특성 가이드"
-            description="각 특성의 효과와 전략적 활용법을 상세히 설명합니다."
-            icon={faStar}
-          />
-          <FeatureCard
-            title="바이옴 가이드"
-            description="맵의 설명과 방향성을 제시해줍니다."
-            icon={faMap}
-          />
-          <FeatureCard
-            title="도구 가이드"
-            description="각 도구의 효과를 상세히 설명합니다."
-            icon={faToolbox}
-          />
-          <FeatureCard
-            title="커뮤니티 포럼"
-            description="다른 트레이너들과 전략을 공유하고 토론하세요."
-            icon={faUsers}
-          />
+          <FeatureCard title="포켓몬 도감" icon={faBook} path="/pokemon" />
+          <FeatureCard title="기술 데이터베이스" icon={faBolt} path="/moves" />
+          <FeatureCard title="특성 가이드" icon={faStar} path="/abilities" />
+          <FeatureCard title="바이옴 가이드" icon={faMap} path="/biomes" />
+          <FeatureCard title="도구 가이드" icon={faToolbox} path="/tools" />
+          <FeatureCard title="커뮤니티 포럼" icon={faUsers} path="/notice" />
           <FeatureCard
             title="포켓몬 타입 계산기"
-            description="포켓몬 타입 상성을 분석하고 최적의 전략을 세워보세요!"
             icon={faCalculator}
+            path="/pokemon-type-calculator"
           />
         </section>
 
@@ -192,7 +178,6 @@ function Home() {
               <FontAwesomeIcon icon={faArrowRight} className="button-icon" />
             </button>
           </div>
-
         </section>
       </main>
 

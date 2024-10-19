@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -6,6 +5,7 @@ import {
   Routes,
   Link,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import database from "./firebase";
 import PokemonList from "./components/PokemonList";
@@ -56,6 +56,15 @@ function App() {
   return (
     <Router>
       <div className={styles.App}>
+        <header className={styles.header}>
+          <Link to="/">
+            <img 
+              src="/Logo.png" 
+              alt="PocketLab Logo" 
+              className={styles.logo}
+            />
+          </Link>
+        </header>
         <main
           className={`${styles.content} ${
             isSidebarOpen ? styles.sidebarOpen : ""
