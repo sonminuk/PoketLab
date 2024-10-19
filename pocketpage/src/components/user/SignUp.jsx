@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import firebase from './FirebaseConfig'; // Firebase 초기화된 인스턴스 가져오기
+import { useNavigate } from 'react-router-dom'; // useNavigate 가져오기
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate(); // useNavigate 인스턴스 생성
 
   const handleSignUp = async (e) => {
     e.preventDefault(); // 기본 form 제출 동작 방지
@@ -20,6 +22,8 @@ const SignUp = () => {
       const user = userCredential.user;
       console.log('User signed up:', user);
       setErrorMessage(''); // 성공 시 에러 메시지 초기화
+      // 로그인 성공 시 "/notice"로 이동
+      navigate('/notice');
     } catch (error) {
       // Firebase에서 발생하는 에러 처리
       console.log("Error code:", error.code);

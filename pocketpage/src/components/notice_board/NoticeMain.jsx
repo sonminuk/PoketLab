@@ -67,7 +67,15 @@ const NoticeMain = () => {
           </button>
         </>
       ) : (
+        <>
         <p>로그인 후 게시글 작성이 가능합니다.</p>
+        <Link to="/user">
+          <button className="noticeMainLoginButton">
+            로그인 페이지로 이동
+          </button>
+         </Link>
+      </>
+        
       )}
 
       <div className="noticeMainBoardNavigation">

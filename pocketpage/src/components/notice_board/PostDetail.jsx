@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import firebase from '../user/FirebaseConfig';
 import CommentForm from './CommentForm';
 
@@ -16,7 +16,9 @@ const PostDetail = () => {
   useEffect(() => {
     const fetchPost = async () => {
       const postRef = firebase.database().ref(`posts/${postId}`);
-      postRef.once('value', (snapshot) => {
+
+      // 게시글 데이터 가져오기
+      postRef.on('value', (snapshot) => {
         setPost(snapshot.val());
       });
 
@@ -30,26 +32,57 @@ const PostDetail = () => {
         });
         setComments(commentsArray);
       });
+
+      // 조회수 증가 처리
+      if (uid) {
+        await postRef.child('views').transaction((currentViews) => {
+          return (currentViews || 0) + 1;
+        });
+      }
     };
 
     fetchPost();
 
+    // 클린업 함수: 이벤트 리스너 해제
     return () => {
+      firebase.database().ref(`posts/${postId}`).off();
       firebase.database().ref(`comments/${postId}`).off();
     };
-  }, [postId]);
+  }, [postId, uid]);
 
   const handleLike = async () => {
     if (post && uid) {
-      const postRef = firebase.database().ref(`posts/${postId}/likes`);
-      await postRef.transaction((currentLikes) => (currentLikes || 0) + 1);
+      const likesRef = firebase.database().ref(`posts/${postId}/likes`);
+      const userLikesRef = firebase.database().ref(`posts/${postId}/userLikes/${uid}`);
+
+      // 유저가 이미 추천했는지 확인
+      const userLikeSnapshot = await userLikesRef.once('value');
+      if (userLikeSnapshot.exists()) {
+        alert('이미 추천하셨습니다.');
+        return;
+      }
+
+      // 추천 수 증가 및 유저 추천 기록 저장
+      await likesRef.transaction((currentLikes) => (currentLikes || 0) + 1);
+      await userLikesRef.set(true);
     }
   };
 
   const handleDislike = async () => {
     if (post && uid) {
-      const postRef = firebase.database().ref(`posts/${postId}/dislikes`);
-      await postRef.transaction((currentDislikes) => (currentDislikes || 0) + 1);
+      const dislikesRef = firebase.database().ref(`posts/${postId}/dislikes`);
+      const userDislikesRef = firebase.database().ref(`posts/${postId}/userDislikes/${uid}`);
+
+      // 유저가 이미 비추천했는지 확인
+      const userDislikeSnapshot = await userDislikesRef.once('value');
+      if (userDislikeSnapshot.exists()) {
+        alert('이미 비추천하셨습니다.');
+        return;
+      }
+
+      // 비추천 수 증가 및 유저 비추천 기록 저장
+      await dislikesRef.transaction((currentDislikes) => (currentDislikes || 0) + 1);
+      await userDislikesRef.set(true);
     }
   };
 
@@ -130,7 +163,14 @@ const PostDetail = () => {
           setCommentToEdit={setCommentToEdit}
         />
       ) : (
-        <p>로그인 후 댓글을 작성할 수 있습니다.</p>
+        <>
+          <p>로그인 후 댓글을 작성할 수 있습니다.</p>
+          <Link to="/user">
+            <button className="noticeMainLoginButton">
+              로그인 페이지로 이동
+            </button>
+          </Link>
+        </>
       )}
     </div>
   );

@@ -14,6 +14,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s; /* 호버 효과 추가 */
+}
+
+/* 로그아웃 버튼 호버 시 스타일 */
+.noticeMainLogoutButton:hover {
+  background-color: #e84142; /* 약간 더 진한 빨간색 */
 }
 
 /* 게시글 작성 버튼 스타일 */
@@ -26,6 +32,12 @@
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;
+  transition: background-color 0.3s; /* 호버 효과 추가 */
+}
+
+/* 게시글 작성 버튼 호버 시 스타일 */
+.noticeMainWriteButton:hover {
+  background-color: #43a047; /* 약간 더 진한 녹색 */
 }
 
 /* 마이페이지 링크 버튼 스타일 */
@@ -37,12 +49,18 @@
   text-decoration: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s; /* 호버 효과 추가 */
+}
+
+/* 마이페이지 링크 버튼 호버 시 스타일 */
+.noticeMainMyPageLink:hover {
+  background-color: #2980b9; /* 약간 더 진한 파란색 */
 }
 
 /* 게시판 네비게이션 컨테이너 */
 .noticeMainBoardNavigation {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
   margin: 20px 0;
 }
 
@@ -54,6 +72,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s; /* 호버 효과 추가 */
+}
+
+/* 게시판 버튼 호버 시 스타일 */
+.noticeMainBoardButton:hover {
+  background-color: #ccc; /* 약간 더 진한 회색 */
 }
 
 /* 활성화된 게시판 버튼 스타일 */
@@ -65,4 +89,46 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s; /* 호버 효과 추가 */
+}
+
+/* 활성화된 게시판 버튼 호버 시 스타일 */
+.noticeMainActiveBoardButton:hover {
+  background-color: #43a047; /* 약간 더 진한 녹색 */
+}
+
+/* 로그인 버튼 스타일 */
+.noticeMainLoginButton {
+  margin-top: 10px;
+  background-color: #58aee7; 
+  color: #fff; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  margin-left: 10px; 
+  transition: background-color 0.3s; 
+}
+
+/* 로그인 버튼 호버 시 스타일 */
+.noticeMainLoginButton:hover {
+  background-color: #2980b9; 
+}
+
+.delete-button {
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #db7a83;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.delete-button:hover {
+  background-color: #ff1e38; 
 }

@@ -26,7 +26,7 @@ const AuthPage = () => {
 
   return (
     <div style={styles.container}>
-      <h1>테스트용 로그인/회원가입 페이지 입니다</h1>
+      <h1>로그인/회원가입</h1>
       
       {/* 사용자 인증 상태를 감시하여 로그인 여부에 따라 메시지 출력 */}
       <AuthObserver setUser={setUser} />

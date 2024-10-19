@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate 가져오기
 import firebase from './FirebaseConfig'; // Firebase 초기화된 인스턴스 가져오기
 
 const Login = () => {
   const [email, setEmail] = useState(''); // 이메일 상태 변수
   const [password, setPassword] = useState(''); // 비밀번호 상태 변수
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태 변수
+  const navigate = useNavigate(); // useNavigate 인스턴스 생성
 
   // 로그인 처리 함수
   const handleLogin = async (e) => {
@@ -21,6 +23,9 @@ const Login = () => {
       const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
       console.log("User logged in:", userCredential.user);
       setErrorMessage(''); // 로그인 성공 시 에러 메시지 초기화
+
+      // 로그인 성공 시 "/notice"로 이동
+      navigate('/notice');
     } catch (error) {
       // 에러 콘솔 출력 (실제 발생한 에러 확인)
       console.log("Error code:", error.code);
@@ -42,7 +47,7 @@ const Login = () => {
             setErrorMessage('너무 많은 시도로 인해 잠시 후 다시 시도해 주세요.');
             break;
           case 'auth/internal-error':
-              setErrorMessage('비정상적이거나 존재하지 않는 정보입니다.');
+            setErrorMessage('비정상적이거나 존재하지 않는 정보입니다.');
             break;
           default:
             setErrorMessage('로그인에 실패했습니다. 다시 시도해주세요.');

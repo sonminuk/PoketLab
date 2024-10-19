@@ -55,6 +55,32 @@ const MyPage = () => {
     navigate(`/post/${postId}`, { state: { uid, email } });
   };
 
+  // 회원 탈퇴 기능
+  const handleDeleteAccount = async () => {
+    const confirmDelete = window.confirm('정말로 회원 탈퇴를 진행하시겠습니까? 회원님의 계정 정보만 삭제됩니다.');
+
+    if (confirmDelete) {
+      try {
+        // 현재 로그인된 사용자 가져오기
+        const user = firebase.auth().currentUser;
+
+        // 사용자 삭제
+        await user.delete();
+
+        alert('회원 탈퇴가 완료되었습니다.');
+        navigate('/user', { replace: true }); // 로그인 페이지로 이동
+      } catch (error) {
+        if (error.code === 'auth/requires-recent-login') {
+          alert('보안을 위해 다시 로그인 후 회원 탈퇴를 진행해주세요.');
+          navigate('/user', { replace: true });
+        } else {
+          console.error('회원 탈퇴 중 오류가 발생했습니다:', error);
+          alert('회원 탈퇴 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+      }
+    }
+  };
+
   if (!uid) {
     return <p>유저 정보를 불러오는 중...</p>; // 기본적으로 로딩 중이거나 리다이렉트 상태
   }
@@ -88,6 +114,9 @@ const MyPage = () => {
           <p>작성한 댓글이 없습니다.</p>
         )}
       </ul>
+      <button onClick={handleDeleteAccount} className="delete-button">
+        회원 탈퇴
+      </button>
     </div>
   );
 };
@@ -97,6 +126,7 @@ const styles = {
     padding: '20px',
     maxWidth: '800px',
     margin: '0 auto',
+    position: 'relative', // 버튼의 절대 위치를 위한 상대적 컨테이너
   },
   list: {
     listStyle: 'none',
@@ -109,6 +139,18 @@ const styles = {
     borderBottom: '1px solid #ccc',
     cursor: 'pointer',
   },
+  deleteButton: {
+    position: 'absolute', // 절대 위치로 설정
+    top: '20px', // 위에서 20px
+    right: '20px', // 오른쪽에서 20px
+    padding: '10px 20px',
+    backgroundColor: '#ff4b5c',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  },
+  
 };
 
 export default MyPage;
