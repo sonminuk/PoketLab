@@ -108,13 +108,13 @@ function Sidebar({ isOpen, toggleSidebar }) {
 
   const menuItems = [
     { path: "/", label: "홈" },
+    { path: "/user", label: "로그인" },
     { path: "/pokemon", label: "포켓몬" },
     { path: "/moves", label: "기술" },
     { path: "/abilities", label: "특성" },
     { path: "/biomes", label: "바이옴" },
     { path: "/tools", label: "도구" },
     { path: "/notice", label: "게시판" },
-    { path: "/user", label: "유저" },
     { path: "/pokemon-type-calculator", label: "포켓몬 타입 계산기" },
   ];
 
