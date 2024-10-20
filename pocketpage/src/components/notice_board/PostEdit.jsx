@@ -91,7 +91,7 @@ const PostEdit = () => {
     <div style={styles.container}>
       <h2 style={styles.title}>게시글 수정</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
-        <div>
+        <div style={styles.inputContainer}>
           <input
             type="text"
             value={title}
@@ -101,7 +101,7 @@ const PostEdit = () => {
             style={styles.input}
           />
         </div>
-        <div>
+        <div style={styles.textareaContainer}>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -124,25 +124,42 @@ const styles = {
     maxWidth: '800px',
     margin: '0 auto',
     padding: '20px',
+    backgroundColor: '#f9f9f9',
+    borderRadius: '8px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
   },
   title: {
     textAlign: 'center',
     marginBottom: '20px',
+    fontSize: '24px',
+    color: '#333',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
   },
+  inputContainer: {
+    marginBottom: '15px',
+  },
+  textareaContainer: {
+    marginBottom: '15px',
+  },
   input: {
-    marginBottom: '10px',
+    width: '100%',
     padding: '10px',
     fontSize: '16px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+    boxSizing: 'border-box',
   },
   textarea: {
-    marginBottom: '10px',
+    width: '100%',
     padding: '10px',
     fontSize: '16px',
-    minHeight: '200px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+    boxSizing: 'border-box',
+    minHeight: '150px',
   },
   buttonContainer: {
     display: 'flex',
@@ -154,6 +171,7 @@ const styles = {
     backgroundColor: '#4CAF50',
     color: 'white',
     border: 'none',
+    borderRadius: '4px',
     cursor: 'pointer',
   },
   deleteButton: {
@@ -162,6 +180,7 @@ const styles = {
     backgroundColor: '#f44336',
     color: 'white',
     border: 'none',
+    borderRadius: '4px',
     cursor: 'pointer',
   },
   error: {

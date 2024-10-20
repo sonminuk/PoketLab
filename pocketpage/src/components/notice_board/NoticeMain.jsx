@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import PostList from "./PostList";
 import AuthObserver from "../user/AuthObserver";
 import firebase from "../user/FirebaseConfig";
-import "./NoticeMain.css"; // CSS 파일 import
+import "./NoticeMain.css"; 
 
 const NoticeMain = () => {
   const [user, setUser] = useState(null); // 유저 상태 추가

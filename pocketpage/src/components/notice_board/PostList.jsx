@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../user/FirebaseConfig';
+import "./NoticeMain.css"; 
 
 const PostList = ({ user, board }) => {
   const [posts, setPosts] = useState([]);
@@ -56,7 +57,7 @@ const PostList = ({ user, board }) => {
           <div
             key={post.id}
             onClick={() => handlePostClick(post.id)}
-            style={{ cursor: 'pointer', display: 'grid', gridTemplateColumns: '50px 1fr 200px 150px 80px 80px 80px', gap: '10px', borderBottom: '1px solid #ccc', padding: '8px 0' }}
+            className="post-item"
           >
             <div>{index + 1}</div>
             <div>{post.title}</div>

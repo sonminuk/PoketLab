@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import firebase from '../user/FirebaseConfig';
+import './NoticeMain.css'; // CSS 파일을 import
 
 const MyPage = () => {
   const [myPosts, setMyPosts] = useState([]);
@@ -92,7 +93,7 @@ const MyPage = () => {
       <ul style={styles.list}>
         {myPosts.length > 0 ? (
           myPosts.map((post) => (
-            <li key={post.id} style={styles.item} onClick={() => handlePostClick(post.id)}>
+            <li key={post.id} className="list-item" onClick={() => handlePostClick(post.id)}>
               <span>[{post.board}] {post.title}</span>
               <span>{new Date(post.createdAt).toLocaleDateString()}</span>
             </li>
@@ -105,7 +106,7 @@ const MyPage = () => {
       <ul style={styles.list}>
         {myComments.length > 0 ? (
           myComments.map((comment) => (
-            <li key={comment.id} style={styles.item} onClick={() => handlePostClick(comment.postId)}>
+            <li key={comment.id} className="list-item" onClick={() => handlePostClick(comment.postId)}>
               <span>{comment.text}</span>
               <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
             </li>
@@ -132,25 +133,6 @@ const styles = {
     listStyle: 'none',
     padding: 0,
   },
-  item: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '10px',
-    borderBottom: '1px solid #ccc',
-    cursor: 'pointer',
-  },
-  deleteButton: {
-    position: 'absolute', // 절대 위치로 설정
-    top: '20px', // 위에서 20px
-    right: '20px', // 오른쪽에서 20px
-    padding: '10px 20px',
-    backgroundColor: '#ff4b5c',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
-  
 };
 
 export default MyPage;
