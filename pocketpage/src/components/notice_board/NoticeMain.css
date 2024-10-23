@@ -14,12 +14,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s; /* 호버 효과 추가 */
+  transition: background-color 0.3s; 
 }
 
-/* 로그아웃 버튼 호버 시 스타일 */
+
 .noticeMainLogoutButton:hover {
-  background-color: #e84142; /* 약간 더 진한 빨간색 */
+  background-color: #e84142; 
 }
 
 /* 게시글 작성 버튼 스타일 */
@@ -32,12 +32,12 @@
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;
-  transition: background-color 0.3s; /* 호버 효과 추가 */
+  transition: background-color 0.3s; 
 }
 
-/* 게시글 작성 버튼 호버 시 스타일 */
+
 .noticeMainWriteButton:hover {
-  background-color: #43a047; /* 약간 더 진한 녹색 */
+  background-color: #43a047; 
 }
 
 /* 마이페이지 링크 버튼 스타일 */
@@ -49,18 +49,18 @@
   text-decoration: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s; /* 호버 효과 추가 */
+  transition: background-color 0.3s;
 }
 
-/* 마이페이지 링크 버튼 호버 시 스타일 */
+
 .noticeMainMyPageLink:hover {
-  background-color: #2980b9; /* 약간 더 진한 파란색 */
+  background-color: #2980b9; 
 }
 
 /* 게시판 네비게이션 컨테이너 */
 .noticeMainBoardNavigation {
   display: flex;
-  justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+  justify-content: flex-end; 
   margin: 20px 0;
 }
 
@@ -72,12 +72,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s; /* 호버 효과 추가 */
+  transition: background-color 0.3s; 
 }
 
-/* 게시판 버튼 호버 시 스타일 */
+
 .noticeMainBoardButton:hover {
-  background-color: #ccc; /* 약간 더 진한 회색 */
+  background-color: #ccc; 
 }
 
 /* 활성화된 게시판 버튼 스타일 */
@@ -89,12 +89,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s; /* 호버 효과 추가 */
+  transition: background-color 0.3s; 
 }
 
-/* 활성화된 게시판 버튼 호버 시 스타일 */
+
 .noticeMainActiveBoardButton:hover {
-  background-color: #43a047; /* 약간 더 진한 녹색 */
+  background-color: #43a047; 
 }
 
 /* 로그인 버튼 스타일 */
@@ -110,7 +110,7 @@
   transition: background-color 0.3s; 
 }
 
-/* 로그인 버튼 호버 시 스타일 */
+
 .noticeMainLoginButton:hover {
   background-color: #2980b9; 
 }
@@ -157,6 +157,11 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+
+.list-item:hover {
+  background-color: #f0f0f0; 
+  color: #333; 
+}
 
 .list-item:hover {
   background-color: #f0f0f0; 
