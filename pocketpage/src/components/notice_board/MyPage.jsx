@@ -4,8 +4,8 @@ import firebase from '../user/FirebaseConfig';
 import './NoticeMain.css'; // CSS 파일을 import
 
 const MyPage = () => {
-  const [myPosts, setMyPosts] = useState([]);
-  const [myComments, setMyComments] = useState([]);
+  const [myPosts, setMyPosts] = useState([]); // 게시글 상태 관리
+  const [myComments, setMyComments] = useState([]); // 댓글 상태 관리
   const navigate = useNavigate();
   const location = useLocation();
   const { uid, email } = location.state || {}; // NoticeMain에서 받은 uid, email 사용

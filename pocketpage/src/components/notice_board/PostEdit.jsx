@@ -6,7 +6,7 @@ const PostEdit = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const { uid, email } = location.state || {};
+  const { uid, email } = location.state || {};  // 유저 정보를 간단화 해서 받아옴
 
   const [post, setPost] = useState(null);
   const [title, setTitle] = useState('');
@@ -14,8 +14,10 @@ const PostEdit = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    
     const fetchPost = async () => {
       try {
+        // 게시글 불러오기
         const postRef = firebase.database().ref(`posts/${postId}`);
         const snapshot = await postRef.once('value');
         const data = snapshot.val();
@@ -31,7 +33,7 @@ const PostEdit = () => {
         setError('게시글을 불러오는 중 오류가 발생했습니다.');
       }
     };
-
+    // 로그인 체크
     if (uid) {
       fetchPost();
     } else {
@@ -39,6 +41,7 @@ const PostEdit = () => {
     }
   }, [postId, uid]);
 
+  // 게시글 수정 함수
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedPost = {
@@ -58,7 +61,7 @@ const PostEdit = () => {
       setError('게시글 수정 중 오류가 발생했습니다.');
     }
   };
-
+ // 게시글 삭제 처리 함수
   const handleDelete = async () => {
     if (window.confirm('게시글을 삭제하시겠습니까?')) {
       try {
