@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import database from '../firebase';
-import './ToolPage.css';
+import React, { useEffect, useState } from "react";
+import database from "../firebase";
+import "./ToolPage.css";
 
 function ToolPage() {
   const [toolsData, setToolsData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      const snapshot = await database.ref('items').once('value');
+      const snapshot = await database.ref("items").once("value");
       setToolsData(snapshot.val());
     };
-    
+
     fetchData();
   }, []);
 
@@ -20,7 +20,7 @@ function ToolPage() {
         <img src={tool.img_href} alt={tool.name} className="tool-image" />
         <div className="tool-info">
           <h4>{tool.name}</h4>
-          {category === "아이템 도구 드롭 확률" ? (
+          {category === "도구 드롭 확률" ? (
             <p>드롭율: {tool.effect}</p>
           ) : category === "랭크업 도구" ? (
             <p>오르는 능력치: {tool.effect}</p>
@@ -52,25 +52,40 @@ function ToolPage() {
   };
 
   const categoryOrder = [
-    "PP 포인트 상승", "아이템 도구 드롭 확률", "도구 정보", "몬스터볼", 
-    "랭크업 도구", "영양제", "이상한 사탕", "PP 포인트 상승", "민트", 
-    "진화도구", "특수도구", "나무열매", "타입 강화 도구", "기타 소지 도구", "중요한 도구"
+    "PP 포인트 상승",
+    "도구 드롭 확률",
+    "회복 도구 정보", // "도구 정보"를 "회복 도구 정보"로 변경
+    "몬스터볼",
+    "랭크업 도구",
+    "영양제",
+    "이상한 사탕",
+    "PP 포인트 상승",
+    "민트",
+    "진화도구",
+    "특수도구",
+    "나무열매",
+    "타입 강화 도구",
+    "기타 소지 도구",
+    "중요한 도구",
   ];
 
   return (
     <div className="tool-page">
-      {categoryOrder.map(category => (
-        toolsData[category] && (
-          <div key={category} className="tool-category">
-            <h2>{category}</h2>
-            <ul className="tool-list">
-              {Object.values(toolsData[category]).map(tool => 
-                renderToolItem(tool, category)
-              )}
-            </ul>
-          </div>
-        )
-      ))}
+      {categoryOrder.map(
+        (category) =>
+          toolsData[category === "회복 도구 정보" ? "도구 정보" : category] && (
+            <div key={category} className="tool-category">
+              <h2>{category}</h2>
+              <ul className="tool-list">
+                {Object.values(
+                  toolsData[
+                    category === "회복 도구 정보" ? "도구 정보" : category
+                  ]
+                ).map((tool) => renderToolItem(tool, category))}
+              </ul>
+            </div>
+          )
+      )}
     </div>
   );
 }
