@@ -21,6 +21,8 @@ const NoticeMain = () => {
     }
   };
 
+
+  // 각각 페이지로 네비게이트 + 유저 정보 전달
   const navigateToPostForm = () => {
     if (user) {
       const { uid, email } = user;
