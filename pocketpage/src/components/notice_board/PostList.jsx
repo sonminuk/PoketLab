@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import firebase from '../user/FirebaseConfig';
 import "./NoticeMain.css"; 
 
+
+// 특정 게시판(board)에 속하는 게시글 목록
 const PostList = ({ user, board }) => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Firebase에서 게시글 데이터를 가져오는 함수
     const fetchPosts = async () => {
       const postRef = firebase.database().ref('posts');
       postRef.orderByChild('board').equalTo(board).on('value', (snapshot) => {
@@ -27,7 +30,7 @@ const PostList = ({ user, board }) => {
       firebase.database().ref('posts').off();
     };
   }, [board]);
-
+ // 게시글을 클릭했을 때 해당 게시글 상세 페이지로 이동하는 함수
   const handlePostClick = (postId) => {
     if (user) {
       navigate(`/post/${postId}`, { state: { uid: user.uid, email: user.email } });
@@ -40,6 +43,7 @@ const PostList = ({ user, board }) => {
     <div>
       <h2>{board} 게시글 목록</h2>
       <hr />
+      {/* 게시글 리스트의 헤더 (번호, 제목, 작성자 등) */}
       <div style={{ display: 'grid', gridTemplateColumns: '50px 1fr 200px 150px 80px 80px 80px', gap: '10px' }}>
         <div><strong>번호</strong></div>
         <div><strong>제목</strong></div>
