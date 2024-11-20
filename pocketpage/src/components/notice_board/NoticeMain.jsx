@@ -3,26 +3,23 @@ import { useNavigate, Link } from "react-router-dom";
 import PostList from "./PostList";
 import AuthObserver from "../user/AuthObserver";
 import firebase from "../user/FirebaseConfig";
-import "./NoticeMain.css"; 
+import "./NoticeMain.css";
 
 const NoticeMain = () => {
   const [user, setUser] = useState(null); // 유저 상태 추가
-  const [currentBoard, setCurrentBoard] = useState("공지사항");
+  const [currentBoard, setCurrentBoard] = useState("전체");
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await firebase.auth().signOut();
       console.log("User logged out");
-      // 로그아웃 시 로그인 페이지로 이동
       navigate("/user", { replace: true });
     } catch (error) {
       console.error("Error logging out:", error.message);
     }
   };
 
-
-  // 각각 페이지로 네비게이트 + 유저 정보 전달
   const navigateToPostForm = () => {
     if (user) {
       const { uid, email } = user;
@@ -40,7 +37,6 @@ const NoticeMain = () => {
 
   const navigateToMyPage = () => {
     if (user) {
-      // user 객체에서 uid와 email만 전달 (복제 가능한 항목만 전달)
       navigate("/mypage", { state: { uid: user.uid, email: user.email } });
     }
   };
@@ -49,7 +45,6 @@ const NoticeMain = () => {
     <div className="noticeMainContainer">
       <h1>{currentBoard} 게시판</h1>
 
-      {/* AuthObserver를 통해 Firebase 인증 상태 감지 및 유저 상태 업데이트 */}
       <AuthObserver setUser={setUser} />
 
       {user ? (
@@ -70,18 +65,15 @@ const NoticeMain = () => {
         </>
       ) : (
         <>
-        <p>로그인 후 게시글 작성이 가능합니다.</p>
-        <Link to="/user">
-          <button className="noticeMainLoginButton">
-            로그인 페이지로 이동
-          </button>
-         </Link>
-      </>
-        
+          <p>로그인 후 게시글 작성이 가능합니다.</p>
+          <Link to="/user">
+            <button className="noticeMainLoginButton">로그인 페이지로 이동</button>
+          </Link>
+        </>
       )}
 
       <div className="noticeMainBoardNavigation">
-        {["공지사항", "정보", "질문", "일반"].map((board) => (
+        {["전체", "일반", "정보", "질문","공지사항"].map((board) => (
           <button
             key={board}
             onClick={() => setCurrentBoard(board)}

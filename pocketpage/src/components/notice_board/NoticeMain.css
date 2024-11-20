@@ -167,3 +167,87 @@
   background-color: #f0f0f0; 
   color: #333; 
 }
+
+
+/*게시판 카테고리 css 추가 */
+
+.post-category {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background-color: #888888; 
+  color: white; 
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 페이지네이션 및 검색바 레이아웃 */
+.pagination-container {
+  display: flex;
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: center; /* 세로 정렬 */
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+}
+
+.page-button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.page-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.page-button.arrow {
+  padding: 5px 8px;
+}
+
+.search-container-custom {
+  display: flex;
+  gap: 8px;
+  background-color: #f9f9f9;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-select-custom {
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.search-input-custom {
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  flex: 1; /* 크기를 검색창에 맞게 */
+}
+
+.search-button-custom {
+  padding: 4px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.search-button-custom:hover {
+  background-color: #0056b3;
+}

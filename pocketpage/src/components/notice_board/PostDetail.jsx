@@ -14,55 +14,51 @@ const PostDetail = () => {
   const { uid, email } = location.state || {};
 
   useEffect(() => {
-    const fetchPost = async () => {
-      const postRef = firebase.database().ref(`posts/${postId}`);
+    const fetchData = async () => {
+      const postRef = firebase.database().ref(`posts/${postId}`).once('value');
+      const commentsRef = firebase.database().ref(`comments/${postId}`).once('value');
 
-      // 게시글 데이터 가져오기
-      postRef.on('value', (snapshot) => {
-        setPost(snapshot.val());
-      });
+      const [postSnapshot, commentsSnapshot] = await Promise.all([postRef, commentsRef]);
 
-      const commentsRef = firebase.database().ref(`comments/${postId}`);
-      commentsRef.on('value', (snapshot) => {
-        const commentsArray = [];
-        snapshot.forEach((childSnapshot) => {
-          const comment = childSnapshot.val();
-          comment.id = childSnapshot.key;
-          commentsArray.push(comment);
-        });
-        setComments(commentsArray);
-      });
+      setPost(postSnapshot.val());
+      setComments(snapshotToArray(commentsSnapshot));
 
-      // 조회수 증가 처리
       if (uid) {
-        await postRef.child('views').transaction((currentViews) => {
+        await firebase.database().ref(`posts/${postId}/views`).transaction((currentViews) => {
           return (currentViews || 0) + 1;
         });
       }
     };
 
-    fetchPost();
-
-    // 클린업 함수: 이벤트 리스너 해제
-    return () => {
-      firebase.database().ref(`posts/${postId}`).off();
-      firebase.database().ref(`comments/${postId}`).off();
-    };
+    fetchData();
   }, [postId, uid]);
+
+  const snapshotToArray = (snapshot) => {
+    const arr = [];
+    snapshot.forEach((childSnapshot) => {
+      const comment = childSnapshot.val();
+      comment.id = childSnapshot.key;
+      arr.push(comment);
+    });
+    return arr;
+  };
+
+  const fetchComments = async () => {
+    const commentsSnapshot = await firebase.database().ref(`comments/${postId}`).once('value');
+    setComments(snapshotToArray(commentsSnapshot));
+  };
 
   const handleLike = async () => {
     if (post && uid) {
       const likesRef = firebase.database().ref(`posts/${postId}/likes`);
       const userLikesRef = firebase.database().ref(`posts/${postId}/userLikes/${uid}`);
 
-      // 유저가 이미 추천했는지 확인
       const userLikeSnapshot = await userLikesRef.once('value');
       if (userLikeSnapshot.exists()) {
         alert('이미 추천하셨습니다.');
         return;
       }
 
-      // 추천 수 증가 및 유저 추천 기록 저장
       await likesRef.transaction((currentLikes) => (currentLikes || 0) + 1);
       await userLikesRef.set(true);
     }
@@ -73,14 +69,12 @@ const PostDetail = () => {
       const dislikesRef = firebase.database().ref(`posts/${postId}/dislikes`);
       const userDislikesRef = firebase.database().ref(`posts/${postId}/userDislikes/${uid}`);
 
-      // 유저가 이미 비추천했는지 확인
       const userDislikeSnapshot = await userDislikesRef.once('value');
       if (userDislikeSnapshot.exists()) {
         alert('이미 비추천하셨습니다.');
         return;
       }
 
-      // 비추천 수 증가 및 유저 비추천 기록 저장
       await dislikesRef.transaction((currentDislikes) => (currentDislikes || 0) + 1);
       await userDislikesRef.set(true);
     }
@@ -95,13 +89,19 @@ const PostDetail = () => {
   };
 
   const handleDeleteComment = async (commentId) => {
-    if (window.confirm('댓글을 삭제하시겠습니까?')) {
-      try {
-        await firebase.database().ref(`comments/${postId}/${commentId}`).remove();
-        console.log('댓글이 성공적으로 삭제되었습니다.');
-      } catch (error) {
-        console.error('댓글 삭제 중 오류가 발생했습니다:', error.message);
-      }
+    const commentsRef = firebase.database().ref(`comments/${postId}/${commentId}`);
+    const postRef = firebase.database().ref(`posts/${postId}/commentsCount`);
+
+    try {
+      await commentsRef.remove();
+      await postRef.transaction((currentCount) => {
+        return (currentCount || 0) > 0 ? currentCount - 1 : 0;
+      });
+      alert('댓글이 삭제되었습니다.');
+      fetchComments(); // 댓글 삭제 후 목록 갱신
+    } catch (error) {
+      console.error('댓글 삭제 중 오류 발생:', error.message);
+      alert('댓글 삭제 중 문제가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
@@ -117,7 +117,7 @@ const PostDetail = () => {
     <div style={styles.container}>
       <h2 style={styles.title}>{post.title}</h2>
       <div style={styles.meta}>
-        작성자: {post.author && post.author.email ? post.author.email : '알 수 없음'} &nbsp;&nbsp;
+        작성자: {post.author?.email || '알 수 없음'} &nbsp;&nbsp;
         추천 {post.likes || 0} &nbsp;&nbsp;
         비추천 {post.dislikes || 0} &nbsp;&nbsp;
         댓글 {comments.length} &nbsp;&nbsp;
@@ -130,7 +130,7 @@ const PostDetail = () => {
       <div style={styles.buttonContainer}>
         <button onClick={handleLike} style={styles.button}>추천</button>
         <button onClick={handleDislike} style={styles.button}>비추천</button>
-        {uid && post.author && post.author.uid === uid && (
+        {uid && post.author?.uid === uid && (
           <button onClick={navigateToEdit} style={styles.button}>수정/삭제</button>
         )}
       </div>
@@ -155,12 +155,13 @@ const PostDetail = () => {
         )}
       </ul>
       {uid ? (
-        <CommentForm 
-          uid={uid} 
-          email={email} 
-          postId={postId} 
+        <CommentForm
+          uid={uid}
+          email={email}
+          postId={postId}
           commentToEdit={commentToEdit}
           setCommentToEdit={setCommentToEdit}
+          onCommentChange={fetchComments} // 댓글 변경 후 호출
         />
       ) : (
         <>
@@ -177,50 +178,17 @@ const PostDetail = () => {
 };
 
 const styles = {
-  container: {
-    maxWidth: '800px',
-    margin: '0 auto',
-    padding: '20px',
-  },
-  title: {
-    textAlign: 'center',
-  },
-  meta: {
-    textAlign: 'right',
-    fontSize: '0.9em',
-    color: '#666',
-  },
-  content: {
-    marginTop: '20px',
-    marginBottom: '20px',
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '20px',
-  },
-  button: {
-    margin: '0 10px',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer',
-  },
-  commentList: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  commentItem: {
-    marginBottom: '10px',
-    padding: '10px',
-    backgroundColor: '#f0f0f0',
-    borderRadius: '5px',
-  },
-  commentButton: {
-    marginRight: '5px',
-    padding: '5px 10px',
-    fontSize: '14px',
-    cursor: 'pointer',
-  },
+
+  // 코드 너무 길어져서 옆으로 넣어서 임시로 압축시킴 일단 나중에 다듬으면서 css 파일에 넣을듯
+  container: { maxWidth: '800px', margin: '0 auto', padding: '20px' },
+  title: { textAlign: 'center' },
+  meta: { textAlign: 'right', fontSize: '0.9em', color: '#666' },
+  content: { marginTop: '20px', marginBottom: '20px' },
+  buttonContainer: { display: 'flex', justifyContent: 'center', marginBottom: '20px' },
+  button: { margin: '0 10px', padding: '10px 20px', fontSize: '16px', cursor: 'pointer' },
+  commentList: { listStyle: 'none', padding: 0 },
+  commentItem: { marginBottom: '10px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '5px' },
+  commentButton: { marginRight: '5px', padding: '5px 10px', fontSize: '14px', cursor: 'pointer' },
 };
 
 export default PostDetail;
