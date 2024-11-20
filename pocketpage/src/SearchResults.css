@@ -57,10 +57,10 @@
 
 /* Pokemon Card Styles */
 .pokemon-card {
-  background: linear-gradient(45deg, #fceabb 0%, #f8b500 100%);
+  background: linear-gradient(45deg, #cdcdcd 0%, #ffffff 100%);
 }
 
-.pokemon-image {
+.search-results .pokemon-image {
   width: 120px;
   height: 120px;
   margin: 0 auto 1rem;

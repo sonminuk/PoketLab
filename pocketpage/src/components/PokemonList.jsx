@@ -1,25 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Star, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import PropTypes from 'prop-types';
 import './PokemonList.css';
 
-function PokemonList({ data }) {
+const pokemonTypes = [
+  '모든 타입', '불꽃', '물', '풀', '전기', '얼음', '격투', '독', '땅', '비행',
+  '에스퍼', '벌레', '바위', '고스트', '드래곤', '악', '강철', '페어리'
+];
+
+const sortOptions = [
+  { value: 'number', label: '번호순' },
+  { value: 'name', label: '이름순' },
+  { value: 'hp', label: 'HP순' },
+  { value: 'attack', label: '공격력순' },
+  { value: 'defense', label: '방어력순' },
+  { value: 'sp_attack', label: '특수공격순' },
+  { value: 'sp_defense', label: '특수방어순' },
+  { value: 'speed', label: '속도순' },
+  { value: 'total', label: '총합순' },
+];
+
+const ITEMS_PER_PAGE = 12;
+
+const extractNumber = (stat) => {
+  const matches = stat.match(/\d+/);
+  return matches ? parseInt(matches[0], 10) : 0;
+};
+
+const cleanPokemonStats = (pokemon) => {
+  return {
+    ...pokemon,
+    hp: extractNumber(pokemon.hp),
+    attack: extractNumber(pokemon.attack),
+    defense: extractNumber(pokemon.defense),
+    sp_attack: extractNumber(pokemon.sp_attack),
+    sp_defense: extractNumber(pokemon.sp_defense),
+    speed: extractNumber(pokemon.speed),
+    total: extractNumber(pokemon.total)
+  };
+};
+
+export default function PokemonList({ data }) {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [typeQuery, setTypeQuery] = useState('모든 타입');
   const [abilityQuery, setAbilityQuery] = useState('');
   const [sortBy, setSortBy] = useState('number');
   const [favorites, setFavorites] = useState([]);
-  const [sortedData, setSortedData] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
-
-  const pokemonTypes = [
-    '모든 타입', '불꽃', '물', '풀', '전기', '얼음', '격투', '독', '땅', '비행',
-    '에스퍼', '벌레', '바위', '고스트', '드래곤', '악', '강철', '페어리'
-  ];
-
-  const extractNumber = (str) => {
-    const match = str.match(/\d+/);
-    return match ? parseInt(match[0]) : 0;
-  };
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const storedFavorites = localStorage.getItem('pokemonFavorites');
@@ -28,63 +57,39 @@ function PokemonList({ data }) {
     }
   }, []);
 
-  useEffect(() => {
-    const filteredData = Object.keys(data).filter(key => {
-      const pokemon = data[key];
-      const matchesName = pokemon.name.toLowerCase().includes(searchQuery);
-      const matchesType = typeQuery === '모든 타입' || pokemon.types.includes(typeQuery);
-      const matchesAbility = pokemon.abilities.toLowerCase().includes(abilityQuery);
+  const sortedData = useMemo(() => {
+    const filteredData = Object.entries(data).filter(([_, pokemon]) => {
+      const matchesName = pokemon.name.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesType = typeQuery === '모든 타입' || (Array.isArray(pokemon.types) ? pokemon.types.includes(typeQuery) : pokemon.types === typeQuery);
+      const matchesAbility = pokemon.abilities.toLowerCase().includes(abilityQuery.toLowerCase());
       const matchesFavorite = !showFavorites || favorites.includes(pokemon.name);
       return matchesName && matchesType && matchesAbility && matchesFavorite;
     });
 
-    const sorted = filteredData.sort((a, b) => {
-      const pokemonA = data[a];
-      const pokemonB = data[b];
+    return filteredData.sort(([keyA, pokemonA], [keyB, pokemonB]) => {
+      const cleanPokemonA = cleanPokemonStats(pokemonA);
+      const cleanPokemonB = cleanPokemonStats(pokemonB);
       switch (sortBy) {
         case 'name':
           return pokemonA.name.localeCompare(pokemonB.name);
         case 'hp':
-          return extractNumber(pokemonB.hp) - extractNumber(pokemonA.hp);
         case 'attack':
-          return extractNumber(pokemonB.attack) - extractNumber(pokemonA.attack);
         case 'defense':
-          return extractNumber(pokemonB.defense) - extractNumber(pokemonA.defense);
         case 'sp_attack':
-          return extractNumber(pokemonB.sp_attack) - extractNumber(pokemonA.sp_attack);
         case 'sp_defense':
-          return extractNumber(pokemonB.sp_defense) - extractNumber(pokemonA.sp_defense);
         case 'speed':
-          return extractNumber(pokemonB.speed) - extractNumber(pokemonA.speed);
         case 'total':
-          return extractNumber(pokemonB.total) - extractNumber(pokemonA.total);
+          return cleanPokemonB[sortBy] - cleanPokemonA[sortBy];
         default:
-          return a.localeCompare(b);
+          return keyA.localeCompare(keyB);
       }
     });
-
-    setSortedData(sorted);
   }, [data, searchQuery, typeQuery, abilityQuery, sortBy, showFavorites, favorites]);
 
-  const handlePokemonClick = (pokemon) => {
-    setSelectedPokemon(pokemon === selectedPokemon ? null : pokemon);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value.toLowerCase());
-  };
-
-  const handleTypeSearchChange = (event) => {
-    setTypeQuery(event.target.value);
-  };
-
-  const handleAbilitySearchChange = (event) => {
-    setAbilityQuery(event.target.value.toLowerCase());
-  };
-
-  const handleSortChange = (event) => {
-    setSortBy(event.target.value);
-  };
+  const paginatedData = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return sortedData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [sortedData, currentPage]);
 
   const toggleFavorite = (pokemon) => {
     const newFavorites = favorites.includes(pokemon.name)
@@ -94,24 +99,25 @@ function PokemonList({ data }) {
     localStorage.setItem('pokemonFavorites', JSON.stringify(newFavorites));
   };
 
-  const toggleShowFavorites = () => {
-    setShowFavorites(!showFavorites);
-  };
+  const totalPages = Math.ceil(sortedData.length / ITEMS_PER_PAGE);
 
   return (
     <div className="pokemon-list-container">
       <div className="search-filters">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="포켓몬 이름 검색..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
+        <div className="search-bar">
+          <Search className="search-icon" />
+          <input
+            type="text"
+            placeholder="포켓몬 이름 검색..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+        </div>
         <select
-          className="dropdown"
           value={typeQuery}
-          onChange={handleTypeSearchChange}
+          onChange={(e) => setTypeQuery(e.target.value)}
+          className="select-input"
         >
           {pokemonTypes.map((type) => (
             <option key={type} value={type}>{type}</option>
@@ -119,71 +125,147 @@ function PokemonList({ data }) {
         </select>
         <input
           type="text"
-          className="search-bar"
           placeholder="특성 검색..."
           value={abilityQuery}
-          onChange={handleAbilitySearchChange}
+          onChange={(e) => setAbilityQuery(e.target.value)}
+          className="search-input"
         />
         <select
-          className="dropdown"
           value={sortBy}
-          onChange={handleSortChange}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="select-input"
         >
-          <option value="number">번호순</option>
-          <option value="name">이름순</option>
-          <option value="hp">HP순</option>
-          <option value="attack">공격력순</option>
-          <option value="defense">방어력순</option>
-          <option value="sp_attack">특수공격순</option>
-          <option value="sp_defense">특수방어순</option>
-          <option value="speed">속도순</option>
-          <option value="total">총합순</option>
+          {sortOptions.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
         </select>
-        <button onClick={toggleShowFavorites} className="favorite-toggle">
+        <button
+          className={`favorite-toggle ${showFavorites ? 'active' : ''}`}
+          onClick={() => setShowFavorites(!showFavorites)}
+        >
           {showFavorites ? '모든 포켓몬 보기' : '즐겨찾기만 보기'}
         </button>
       </div>
-
       <div className="pokemon-grid">
-        {sortedData.map((key) => {
-          const pokemon = data[key];
-          const isFavorite = favorites.includes(pokemon.name);
+        {paginatedData.map(([key, pokemon]) => {
+          const cleanedStats = cleanPokemonStats(pokemon);
           return (
             <div
               key={key}
-              className={`pokemon-card ${selectedPokemon === pokemon ? 'selected' : ''} ${isFavorite ? 'favorite' : ''}`}
-              onClick={() => handlePokemonClick(pokemon)}
+              className={`pokemon-card ${selectedPokemon === pokemon ? 'selected' : ''}`}
+              onClick={() => setSelectedPokemon(selectedPokemon === pokemon ? null : pokemon)}
             >
-              <img className="pokemon-image" src={pokemon.img_href} alt={pokemon.name} />
+              <div className="pokemon-image-container">
+                <img src={pokemon.img_href} alt={pokemon.name} className="pokemon-image" />
+                <button
+                  className={`favorite-button ${favorites.includes(pokemon.name) ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(pokemon);
+                  }}
+                >
+                  <Star className="star-icon" />
+                </button>
+              </div>
               <h3 className="pokemon-name">{pokemon.name}</h3>
-              <button
-                className={`favorite-button ${isFavorite ? 'favorite' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFavorite(pokemon);
-                }}
-              >
-                {isFavorite ? '★' : '☆'}
-              </button>
+              
+              <div className="pokemon-types">
+                {Array.isArray(pokemon.types)
+                  ? pokemon.types.map(type => <span key={type} className={`type-badge ${type}`}>{type}</span>)
+                  : <span className={`type-badge ${pokemon.types}`}>{pokemon.types}</span>
+                }
+              </div>
+              
               {selectedPokemon === pokemon && (
                 <div className="pokemon-details">
-                  <p><strong>타입:</strong> {pokemon.types}</p>
                   <p><strong>특성:</strong> {pokemon.abilities}</p>
-                  <p><strong>HP:</strong> {pokemon.hp}</p>
-                  <p><strong>공격:</strong> {pokemon.attack}</p>
-                  <p><strong>방어:</strong> {pokemon.defense}</p>
-                  <p><strong>특수 공격:</strong> {pokemon.sp_attack}</p>
-                  <p><strong>특수 방어:</strong> {pokemon.sp_defense}</p>
-                  <p><strong>속도:</strong> {pokemon.speed}</p>
-                  <p><strong>총합:</strong> {pokemon.total}</p>
+                  <div className="stat-grid">
+                    <div className="stat-item">
+                      <span className="stat-label">HP</span>
+                      <div className="stat-bar">
+                        <div className="stat-fill hp" style={{width: `${(cleanedStats.hp / 255) * 100}%`}}></div>
+                      </div>
+                      <span className="stat-value">{cleanedStats.hp}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">공격</span>
+                      <div className="stat-bar">
+                        <div className="stat-fill attack" style={{width: `${(cleanedStats.attack / 255) * 100}%`}}></div>
+                      </div>
+                      <span className="stat-value">{cleanedStats.attack}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">방어</span>
+                      <div className="stat-bar">
+                        <div className="stat-fill defense" style={{width: `${(cleanedStats.defense / 255) * 100}%`}}></div>
+                      </div>
+                      <span className="stat-value">{cleanedStats.defense}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">특수공격</span>
+                      <div className="stat-bar">
+                        <div className="stat-fill sp-attack" style={{width: `${(cleanedStats.sp_attack / 255) * 100}%`}}></div>
+                      </div>
+                      <span className="stat-value">{cleanedStats.sp_attack}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">특수방어</span>
+                      <div className="stat-bar">
+                        <div className="stat-fill sp-defense" style={{width: `${(cleanedStats.sp_defense / 255) * 100}%`}}></div>
+                      </div>
+                      <span className="stat-value">{cleanedStats.sp_defense}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">속도</span>
+                      <div className="stat-bar">
+                        <div className="stat-fill speed" style={{width: `${(cleanedStats.speed / 255) * 100}%`}}></div>
+                      </div>
+                      <span className="stat-value">{cleanedStats.speed}</span>
+                    </div>
+                  </div>
+                  <p className="total-stats"><strong>총합:</strong> {cleanedStats.total}</p>
                 </div>
               )}
             </div>
           );
         })}
       </div>
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="pagination-button"
+        >
+          <ChevronLeft />
+        </button>
+        <span>페이지 {currentPage} / {totalPages}</span>
+        <button
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className="pagination-button"
+        >
+          <ChevronRight />
+        </button>
+      </div>
     </div>
   );
 }
 
-export default PokemonList;
+PokemonList.propTypes = {
+  data: PropTypes.objectOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    img_href: PropTypes.string.isRequired,
+    types: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ]).isRequired,
+    abilities: PropTypes.string.isRequired,
+    hp: PropTypes.string.isRequired,
+    attack: PropTypes.string.isRequired,
+    defense: PropTypes.string.isRequired,
+    sp_attack: PropTypes.string.isRequired,
+    sp_defense: PropTypes.string.isRequired,
+    speed: PropTypes.string.isRequired,
+    total: PropTypes.string.isRequired,
+  })).isRequired,
+};
