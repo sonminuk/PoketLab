@@ -61,7 +61,7 @@ const PostForm = () => {
           onChange={(e) => setSelectedBoard(e.target.value)}
           style={styles.select}
         >
-          <option value="공지사항">공지사항</option>
+          {/* <option value="공지사항">공지사항</option> */}
           <option value="정보">정보</option>
           <option value="질문">질문</option>
           <option value="일반">일반</option>
