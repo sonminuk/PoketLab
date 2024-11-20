@@ -55,7 +55,7 @@
 ## 기술 스택
 
 - **프론트엔드**: React, HTML, CSS, JavaScript,
-- **백엔드**: Firebase Realtime Database, Node.js, spring boot
+- **백엔드**: Firebase Realtime Database, Node.js
 - **데이터 수집**: 웹 스크래핑 (python 사용)
 
 ## 현) 프로젝트 구조
